@@ -103,3 +103,35 @@ _If you are finished with the functionality and testing of your project_, then y
 [GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
 
 If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+
+
+
+
+
+
+
+# Refactor-Tracker - Fitlit
+
+
+
+## Set Up
+
+1. Clone the repo
+2. run npm init
+3. cd into src
+4. open index.html
+
+## Website
+
+![Alt Text](https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif)
+
+
+## Inspiration
+
+Our instructors were a wonderful inspiration to git it done. 
+
+## Contributors:
+
+[Collie Kallery](https://github.com/)
+[Karl Nielsen](https://github.com/karlfunhouse)
+[Melissa VanKempen](https://github.com/Melizzo)
