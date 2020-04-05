@@ -42,47 +42,61 @@ hydrationData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydratio
 Promise.all([userData, sleepData, activityData, hydrationData])
   .then(data => {
     userData = data[0];
-    console.log('userData', userData);
+    // console.log('userData', userData);
     sleepData = data[1];
-    console.log('sleepData', sleepData);
+    // console.log('sleepData', sleepData);
     activityData = data[2];
     hydrationData = data[3];
   })
   .then(() => {
     userRepository = new UserRepository();
-    console.log('userRepo', userRepository);
     instantiateAllUsers();
-    console.log('userRepo2', userRepository);
-    // instantiateAllUsersActivity();
-    // instantiateAllUsersHydration();
-    // instantiateAllUsersSleep();
+    console.log('userrepo', userRepository.users[0]);
+    instantiateAllUsersActivity();
+    instantiateAllUsersHydration();
+    instantiateAllUsersSleep();
   })
+  .then(() => {
+    let user = userRepository.users[Math.floor(Math.random() * userRepository.users.length)]
+    console.log('random user', user)
+  })
+  .catch(error => {console.log('Something is amiss with promise all', error)});
 
-// let userRepository = new UserRepository();
+
 let instantiateAllUsers = () => {
   userData.forEach(user => {
     user = new User(user);
     userRepository.users.push(user)
   })
 }
-//
-// function instantiateAllUsersActivity() {
-//   activityData.forEach(activity => {
-//     activity = new Activity(activity, userRepository);
-//   })
-// };
-//
-// function instantiateAllUsersHydration() {
-//   hydrationData.forEach(hydration => {
-//     hydration = new Hydration(hydration, userRepository);
-//   })
-// };
-//
-// function instantiateAllUsersSleep() {
-//   sleepData.forEach(sleep => {
-//     sleep = new Sleep(sleep, userRepository);
-//   })
-// };
+
+let instantiateAllUsersActivity = () => {
+  activityData.forEach(activity => {
+    activity = new Activity(activity, userRepository)
+  })
+};
+
+let instantiateAllUsersHydration = () => {
+  hydrationData.forEach(hydration => {
+    hydration = new Hydration(hydration, userRepository);
+  })
+};
+
+let instantiateAllUsersSleep = () => {
+  sleepData.forEach(sleep => {
+    sleep = new Sleep(sleep, userRepository);
+  })
+};
+
+function onLoad() {
+  generateRandomUser(userRepository)
+  console.log(user[0]);
+}
+
+let generateRandomUser = (dataSet) => {
+  dataSet.sort(() => Math.random() * 50)
+  console.log(dataSet)
+}
 
 // function postNewSleepData() {
 //   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
