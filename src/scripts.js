@@ -39,6 +39,11 @@ hydrationData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydratio
   .then(data => data.hydrationData)
   .catch(error => console.log('hydrationData error'))
 
+// We need to somehow make sure that we have access to all
+// of the methods in every class. So when we call hydration.Method(),
+// it knows what hydration is and that it's supposed to reach
+// into that class and execute a method from there.
+
 Promise.all([userData, sleepData, activityData, hydrationData])
   .then(data => {
     userData = data[0];
@@ -176,14 +181,6 @@ let generateRandomUser = (dataSet) => {
 // let dailyOz = document.querySelectorAll('.daily-oz');
 let dailyOz = $('.daily-oz');
 let dropdownFriendsStepsContainer = $('#dropdown-friends-steps-container');
-// let hydrationCalendarCard = $('#hydration-calendar-card');
-// let hydrationFriendsCard = $('#hydration-friends-card');
-// let hydrationInfoCard = $('#hydration-info-card');
-// let hydrationMainCard = $('#hydration-main-card');
-// let sleepCalendarCard = $('#sleep-calendar-card');
-// let sleepFriendsCard = $('#sleep-friends-card');
-// let sleepInfoCard = $('#sleep-info-card');
-// let sleepMainCard = $('#sleep-main-card');
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
 //     return -1;
@@ -193,17 +190,6 @@ let dropdownFriendsStepsContainer = $('#dropdown-friends-steps-container');
 //   }
 //   return 0;
 // });
-// let stairsCalendarCard = $('#stairs-calendar-card');
-// let stepsMainCard = $('#steps-main-card');
-// let stepsInfoCard = $('#steps-info-card');
-// let stepsFriendsCard = $('#steps-friends-card');
-// let stepsTrendingCard = $('#steps-trending-card');
-// let stepsCalendarCard = $('#steps-calendar-card');
-// let stairsFriendsCard = $('#stairs-friends-card');
-// let stairsInfoCard = $('#stairs-info-card');
-// let stairsMainCard = $('#stairs-main-card');
-// let stairsTrendingCard = $('#stairs-trending-card');
-// let userInfoDropdown = $('#user-info-dropdown');
 
 $('main').on('click', (event) => showInfo());
 $('#profile-button').on('click', (event) => showDropdown());
@@ -219,6 +205,10 @@ function showDropdown() {
   $('#user-info-dropdown').toggle('hide');
 }
 
+// Maybe try to break up this handler into four separate handlers
+// Steps, stairs, hydration, and sleep. To do this we'd likely
+// have to create four different jQuery event listeners,
+// so unsure which option is better.
 function showInfo() {
   if ($(event.target).hasClass('steps-info-button')) {
     flipCard($('#steps-main-card'), $('#steps-info-card'));
@@ -290,6 +280,10 @@ let updateTrendingStepDays = (user) => {
 //   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
 // }
 //
+
+// Maybe create a parent / handler function called 'displayUserInfo()' that is
+// called in the promise and does ALL of the below text insertions.
+
 $('#dropdown-goal').text(`DAILY STEP GOAL | ${user.dailyStepGoal}`)
 
 $('#dropdown-email').text(`EMAIL | ${user.email}`)
