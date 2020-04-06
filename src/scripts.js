@@ -42,16 +42,13 @@ hydrationData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydratio
 Promise.all([userData, sleepData, activityData, hydrationData])
   .then(data => {
     userData = data[0];
-    // console.log('userData', userData);
     sleepData = data[1];
-    // console.log('sleepData', sleepData);
     activityData = data[2];
     hydrationData = data[3];
   })
   .then(() => {
     userRepository = new UserRepository();
     instantiateAllUsers();
-    console.log('userrepo', userRepository.users[0]);
     instantiateAllUsersActivity();
     instantiateAllUsersHydration();
     instantiateAllUsersSleep();
@@ -179,14 +176,14 @@ let generateRandomUser = (dataSet) => {
 // let dailyOz = document.querySelectorAll('.daily-oz');
 let dailyOz = $('.daily-oz');
 let dropdownFriendsStepsContainer = $('#dropdown-friends-steps-container');
-let hydrationCalendarCard = $('#hydration-calendar-card');
-let hydrationFriendsCard = $('#hydration-friends-card');
-let hydrationInfoCard = $('#hydration-info-card');
-let hydrationMainCard = $('#hydration-main-card');
-let sleepCalendarCard = $('#sleep-calendar-card');
-let sleepFriendsCard = $('#sleep-friends-card');
-let sleepInfoCard = $('#sleep-info-card');
-let sleepMainCard = $('#sleep-main-card');
+// let hydrationCalendarCard = $('#hydration-calendar-card');
+// let hydrationFriendsCard = $('#hydration-friends-card');
+// let hydrationInfoCard = $('#hydration-info-card');
+// let hydrationMainCard = $('#hydration-main-card');
+// let sleepCalendarCard = $('#sleep-calendar-card');
+// let sleepFriendsCard = $('#sleep-friends-card');
+// let sleepInfoCard = $('#sleep-info-card');
+// let sleepMainCard = $('#sleep-main-card');
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
 //     return -1;
@@ -196,17 +193,17 @@ let sleepMainCard = $('#sleep-main-card');
 //   }
 //   return 0;
 // });
-let stairsCalendarCard = $('#stairs-calendar-card');
-let stepsMainCard = $('#steps-main-card');
-let stepsInfoCard = $('#steps-info-card');
-let stepsFriendsCard = $('#steps-friends-card');
-let stepsTrendingCard = $('#steps-trending-card');
-let stepsCalendarCard = $('#steps-calendar-card');
-let stairsFriendsCard = $('#stairs-friends-card');
-let stairsInfoCard = $('#stairs-info-card');
-let stairsMainCard = $('#stairs-main-card');
-let stairsTrendingCard = $('#stairs-trending-card');
-let userInfoDropdown = $('#user-info-dropdown');
+// let stairsCalendarCard = $('#stairs-calendar-card');
+// let stepsMainCard = $('#steps-main-card');
+// let stepsInfoCard = $('#steps-info-card');
+// let stepsFriendsCard = $('#steps-friends-card');
+// let stepsTrendingCard = $('#steps-trending-card');
+// let stepsCalendarCard = $('#steps-calendar-card');
+// let stairsFriendsCard = $('#stairs-friends-card');
+// let stairsInfoCard = $('#stairs-info-card');
+// let stairsMainCard = $('#stairs-main-card');
+// let stairsTrendingCard = $('#stairs-trending-card');
+// let userInfoDropdown = $('#user-info-dropdown');
 
 $('main').on('click', (event) => showInfo());
 $('#profile-button').on('click', (event) => showDropdown());
@@ -219,63 +216,63 @@ function flipCard(cardToHide, cardToShow) {
 }
 
 function showDropdown() {
-  $(userInfoDropdown).toggle('hide');
+  $('#user-info-dropdown').toggle('hide');
 }
 
 function showInfo() {
   if ($(event.target).hasClass('steps-info-button')) {
-    flipCard(stepsMainCard, stepsInfoCard);
+    flipCard($('#steps-main-card'), $('#steps-info-card'));
   }
   if ($(event.target).hasClass('steps-friends-button')) {
-    flipCard(stepsMainCard, stepsFriendsCard);
+    flipCard($('#steps-main-card'), $('#steps-friends-card'));
   }
   if ($(event.target).hasClass('steps-trending-button')) {
-    flipCard(stepsMainCard, stepsTrendingCard);
+    flipCard($('#steps-main-card'), $('#steps-trending-card'));
   }
   if ($(event.target).hasClass('steps-calendar-button')) {
-    flipCard(stepsMainCard, stepsCalendarCard);
+    flipCard($('#steps-main-card'), $('#steps-calendar-card'));
   }
   if ($(event.target).hasClass('hydration-info-button')) {
-    flipCard(hydrationMainCard, hydrationInfoCard);
+    flipCard($('#hydration-main-card'), $('#hydration-info-card'));
   }
   if ($(event.target).hasClass('hydration-friends-button')) {
-    flipCard(hydrationMainCard, hydrationFriendsCard);
+    flipCard($('#hydration-main-card'), $('#hydration-friends-card'));
   }
   if ($(event.target).hasClass('hydration-calendar-button')) {
-    flipCard(hydrationMainCard, hydrationCalendarCard);
+    flipCard($('#hydration-main-card'), $('#hydration-calendar-card'));
   }
   if ($(event.target).hasClass('stairs-info-button')) {
-    flipCard(stairsMainCard, stairsInfoCard);
+    flipCard($('#stairs-main-card'), $('#stairs-info-card'));
   }
   if ($(event.target).hasClass('stairs-friends-button')) {
-    flipCard(stairsMainCard, stairsFriendsCard);
+    flipCard($('#stairs-main-card'), $('#stairs-friends-card'));
   }
   if ($(event.target).hasClass('stairs-trending-button')) {
-    flipCard(stairsMainCard, stairsTrendingCard);
+    flipCard($('#stairs-main-card'), $('#stairs-trending-card'));
   }
   if ($(event.target).hasClass('stairs-calendar-button')) {
-    flipCard(stairsMainCard, stairsCalendarCard);
+    flipCard($('#stairs-main-card'), $('#stairs-calendar-card'));
   }
   if ($(event.target).hasClass('sleep-info-button')) {
-    flipCard(sleepMainCard, sleepInfoCard);
+    flipCard($('#sleep-main-card'), $('#sleep-info-card'));
   }
   if ($(event.target).hasClass('sleep-friends-button')) {
-    flipCard(sleepMainCard, sleepFriendsCard);
+    flipCard($('#sleep-main-card'), $('#sleep-friends-card'));
   }
   if ($(event.target).hasClass('sleep-calendar-button')) {
-    flipCard(sleepMainCard, sleepCalendarCard);
+    flipCard($('#sleep-main-card'), $('#sleep-calendar-card'));
   }
   if ($(event.target).hasClass('steps-go-back-button')) {
-    flipCard(event.target.parentNode, stepsMainCard);
+    flipCard(event.target.parentNode, $('#steps-main-card'));
   }
   if ($(event.target).hasClass('hydration-go-back-button')) {
-    flipCard(event.target.parentNode, hydrationMainCard);
+    flipCard(event.target.parentNode, $('#hydration-main-card'));
   }
   if ($(event.target).hasClass('stairs-go-back-button')) {
-    flipCard(event.target.parentNode, stairsMainCard);
+    flipCard(event.target.parentNode, $('#stairs-main-card'));
   }
   if ($(event.target).hasClass('sleep-go-back-button')) {
-    flipCard(event.target.parentNode, sleepMainCard);
+    flipCard(event.target.parentNode, $('#sleep-main-card'));
   }
 }
 
