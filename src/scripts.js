@@ -61,6 +61,7 @@ Promise.all([userData, sleepData, activityData, hydrationData])
     let todayDate = "2019/09/22";
     user.findFriendsNames(userRepository.users);
     updateTrendingStairsDays(user);
+    updateTrendingStepDays(user);
 
     console.log('random user', user)
   })
@@ -318,14 +319,14 @@ function showInfo() {
   }
 }
 
-let updateTrendingStairsDays = () => {
+let updateTrendingStairsDays = (user) => {
   user.findTrendingStairsDays();
-  trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
+  $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
 }
 
-let updateTrendingStepDays = () => {
+let updateTrendingStepDays = (user) => {
   user.findTrendingStepDays();
-  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+  $('.trending-steps-phrase-container').html(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
 }
 //
 // for (var i = 0; i < dailyOz.length; i++) {
