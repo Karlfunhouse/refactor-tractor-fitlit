@@ -116,7 +116,7 @@ let generateRandomUser = (dataSet) => {
 
 // let updateTrendingStairsDays = (user) => {
 //   user.findTrendingStairsDays();
-//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
+//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`
 // }
 //
 // function updateTrendingStepDays() {
@@ -295,85 +295,91 @@ let trendingStairsPhraseContainer = $('.trending-stairs-phrase-container');
 let userInfoDropdown = $('#user-info-dropdown');
 //
 // mainPage.addEventListener('click', showInfo);
+$(mainPage).on('click', (event) => showInfo());
 // profileButton.addEventListener('click', showDropdown);
+$(profileButton).on('click', (event) => showDropdown());
 // stairsTrendingButton.addEventListener('click', updateTrendingStairsDays());
+$(stairsTrendingButton).on('click', (event) => updateTrendingStairsDays)
 // stepsTrendingButton.addEventListener('click', updateTrendingStepDays());
+$(stepsTrendingButton).on('click', (event) => updateTrendingStepDays)
 //
-// function flipCard(cardToHide, cardToShow) {
-//   cardToHide.classList.add('hide');
-//   cardToShow.classList.remove('hide');
-// }
-//
-// function showDropdown() {
-//   userInfoDropdown.classList.toggle('hide');
-// }
-//
-// function showInfo() {
-//   if (event.target.classList.contains('steps-info-button')) {
-//     flipCard(stepsMainCard, stepsInfoCard);
-//   }
-//   if (event.target.classList.contains('steps-friends-button')) {
-//     flipCard(stepsMainCard, stepsFriendsCard);
-//   }
-//   if (event.target.classList.contains('steps-trending-button')) {
-//     flipCard(stepsMainCard, stepsTrendingCard);
-//   }
-//   if (event.target.classList.contains('steps-calendar-button')) {
-//     flipCard(stepsMainCard, stepsCalendarCard);
-//   }
-//   if (event.target.classList.contains('hydration-info-button')) {
-//     flipCard(hydrationMainCard, hydrationInfoCard);
-//   }
-//   if (event.target.classList.contains('hydration-friends-button')) {
-//     flipCard(hydrationMainCard, hydrationFriendsCard);
-//   }
-//   if (event.target.classList.contains('hydration-calendar-button')) {
-//     flipCard(hydrationMainCard, hydrationCalendarCard);
-//   }
-//   if (event.target.classList.contains('stairs-info-button')) {
-//     flipCard(stairsMainCard, stairsInfoCard);
-//   }
-//   if (event.target.classList.contains('stairs-friends-button')) {
-//     flipCard(stairsMainCard, stairsFriendsCard);
-//   }
-//   if (event.target.classList.contains('stairs-trending-button')) {
-//     flipCard(stairsMainCard, stairsTrendingCard);
-//   }
-//   if (event.target.classList.contains('stairs-calendar-button')) {
-//     flipCard(stairsMainCard, stairsCalendarCard);
-//   }
-//   if (event.target.classList.contains('sleep-info-button')) {
-//     flipCard(sleepMainCard, sleepInfoCard);
-//   }
-//   if (event.target.classList.contains('sleep-friends-button')) {
-//     flipCard(sleepMainCard, sleepFriendsCard);
-//   }
-//   if (event.target.classList.contains('sleep-calendar-button')) {
-//     flipCard(sleepMainCard, sleepCalendarCard);
-//   }
-//   if (event.target.classList.contains('steps-go-back-button')) {
-//     flipCard(event.target.parentNode, stepsMainCard);
-//   }
-//   if (event.target.classList.contains('hydration-go-back-button')) {
-//     flipCard(event.target.parentNode, hydrationMainCard);
-//   }
-//   if (event.target.classList.contains('stairs-go-back-button')) {
-//     flipCard(event.target.parentNode, stairsMainCard);
-//   }
-//   if (event.target.classList.contains('sleep-go-back-button')) {
-//     flipCard(event.target.parentNode, sleepMainCard);
-//   }
-// }
-//
-// function updateTrendingStairsDays() {
-//   user.findTrendingStairsDays();
-//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
-// }
-//
-// function updateTrendingStepDays() {
-//   user.findTrendingStepDays();
-//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
-// }
+function flipCard(cardToHide, cardToShow) {
+  // cardToHide.classList.add('hide');
+  $(cardToHide).addClass('hide');
+  // cardToShow.classList.remove('hide');
+  $(cardToShow).removeClass('hide')
+}
+
+function showDropdown() {
+  $(userInfoDropdown).toggle('hide');
+}
+
+function showInfo() {
+  if ($(event.target).hasClass('steps-info-button')) {
+    flipCard(stepsMainCard, stepsInfoCard);
+  }
+  if ($(event.target).hasClass('steps-friends-button')) {
+    flipCard(stepsMainCard, stepsFriendsCard);
+  }
+  if ($(event.target).hasClass('steps-trending-button')) {
+    flipCard(stepsMainCard, stepsTrendingCard);
+  }
+  if ($(event.target).hasClass('steps-calendar-button')) {
+    flipCard(stepsMainCard, stepsCalendarCard);
+  }
+  if ($(event.target).hasClass('hydration-info-button')) {
+    flipCard(hydrationMainCard, hydrationInfoCard);
+  }
+  if ($(event.target).hasClass('hydration-friends-button')) {
+    flipCard(hydrationMainCard, hydrationFriendsCard);
+  }
+  if ($(event.target).hasClass('hydration-calendar-button')) {
+    flipCard(hydrationMainCard, hydrationCalendarCard);
+  }
+  if ($(event.target).hasClass('stairs-info-button')) {
+    flipCard(stairsMainCard, stairsInfoCard);
+  }
+  if ($(event.target).hasClass('stairs-friends-button')) {
+    flipCard(stairsMainCard, stairsFriendsCard);
+  }
+  if ($(event.target).hasClass('stairs-trending-button')) {
+    flipCard(stairsMainCard, stairsTrendingCard);
+  }
+  if ($(event.target).hasClass('stairs-calendar-button')) {
+    flipCard(stairsMainCard, stairsCalendarCard);
+  }
+  if ($(event.target).hasClass('sleep-info-button')) {
+    flipCard(sleepMainCard, sleepInfoCard);
+  }
+  if ($(event.target).hasClass('sleep-friends-button')) {
+    flipCard(sleepMainCard, sleepFriendsCard);
+  }
+  if ($(event.target).hasClass('sleep-calendar-button')) {
+    flipCard(sleepMainCard, sleepCalendarCard);
+  }
+  if ($(event.target).hasClass('steps-go-back-button')) {
+    flipCard(event.target.parentNode, stepsMainCard);
+  }
+  if ($(event.target).hasClass('hydration-go-back-button')) {
+    flipCard(event.target.parentNode, hydrationMainCard);
+  }
+  if ($(event.target).hasClass('stairs-go-back-button')) {
+    flipCard(event.target.parentNode, stairsMainCard);
+  }
+  if ($(event.target).hasClass('sleep-go-back-button')) {
+    flipCard(event.target.parentNode, sleepMainCard);
+  }
+}
+
+let updateTrendingStairsDays = () => {
+  user.findTrendingStairsDays();
+  trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
+}
+
+let updateTrendingStepDays = () => {
+  user.findTrendingStepDays();
+  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+}
 //
 // for (var i = 0; i < dailyOz.length; i++) {
 //   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
