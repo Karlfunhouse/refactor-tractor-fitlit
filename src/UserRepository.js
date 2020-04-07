@@ -1,9 +1,16 @@
 import sleepData from './data/sleep';
 
+// Pass in all data upon instantiation.
 class UserRepository {
-  constructor() {
+  constructor(userData, sleepData, activityData, hydrationData) {
     this.users = [];
+    // this.userData = userData
+    // this.sleepData = sleepData;
+    // this.activityData = activityData;
+    // this.hydrationData = hydrationData;
   }
+  // This is not being called anywhere
+  // Could be used for finding friends. 
   getUser(id) {
     return this.users.find(function(user) {
       return user.id === id;
