@@ -35,10 +35,33 @@ button:active {
   width: 5.6vw;
 }
 
+#add-data-button {
+  background-image: url(../images/plus.png);
+  background-position: center;
+  background-size: 5.6vw;
+  border: none;
+  display: inline;
+  float: left;
+  height: 5.6vw;
+  margin-left: 1vw;
+  margin-top: 1.6vw;
+  width: 5.6vw;
+}
+
 #user-info-dropdown {
   background-color: #1F1F1F;
   color: white;
   margin-left: 60%;
+  margin-top: -1.2%;
+  position: relative;
+  text-align: center;
+  z-index: 100;
+}
+
+#add-data-dropdown {
+  background-color: #1F1F1F;
+  color: white;
+  margin-right: 60%;
   margin-top: -1.2%;
   position: relative;
   text-align: center;

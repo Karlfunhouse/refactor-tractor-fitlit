@@ -105,7 +105,8 @@ let generateRandomUser = (dataSet) => {
 
 // EVENTS
 $('main').on('click', (event) => showInfo());
-$('#profile-button').on('click', (event) => showDropdown());
+$('#profile-button').on('click', (event) => showUserDropdown());
+$('#add-data-button').on('click', (event) => showActivityDropdown());
 $('.stairs-trending-button').on('click', (event) => updateTrendingStairsDays)
 $('.steps-trending-button').on('click', (event) => updateTrendingStepDays)
 
@@ -114,8 +115,12 @@ function flipCard(cardToHide, cardToShow) {
   $(cardToShow).removeClass('hide')
 }
 
-function showDropdown() {
+function showUserDropdown() {
   $('#user-info-dropdown').toggle('hide');
+}
+
+function showActivityDropdown() {
+  $('#add-data-dropdown').toggle('hide');
 }
 
 // Maybe try to break up this handler into four separate handlers
