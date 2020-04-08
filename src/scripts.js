@@ -54,7 +54,8 @@ Promise.all([userData, sleepData, activityData, hydrationData])
   })
   .then(() => {
     let user = userRepository.users[Math.floor(Math.random() * userRepository.users.length)]
-    let todayDate = "2019/09/22";
+    let todayDate = "2020/01/22";
+    console.log(user);
     user.findFriendsNames(userRepository.users);
     updateTrendingStairsDays(user);
     updateTrendingStepDays(user);
@@ -302,11 +303,14 @@ let displayUserInfo = (user, todayDate) => {
 
 // 1 WEEK LEFT CHECKLIST:
   // [ ] Date data (find out wtf is going on here)
+      // [ ] Down the road: working with data up to 1/22
+      // or working with more recent data?
   // [ ] POSTing:
       // [ ] Already written out by Karl - flesh it out
       // [ ] DOM element for user input
           // [ ] One main input with dropdown menu for different activites
           // [ ] Four separate inputs on each card
+      // [ ] How to populate newly posted data
   // [ ] Refactor / consider each method in every class:
       // [ ] Employ arguemnts and parameters for changing behaviors
       // [ ] Make sure they are in places we want them to live
