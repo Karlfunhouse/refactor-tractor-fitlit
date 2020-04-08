@@ -1,11 +1,6 @@
+// IMPORTS
 import './css/base.scss';
 import './css/styles.scss';
-
-// import userData from './data/users';
-// import activityData from './data/activity';
-// import sleepData from './data/sleep';
-// import hydrationData from './data/hydration';
-
 import UserRepository from './UserRepository';
 import User from './User';
 import Activity from './Activity';
@@ -13,12 +8,14 @@ import Hydration from './Hydration';
 import Sleep from './Sleep';
 import $ from 'jquery';
 
+// GLOBALS
 let userRepository;
 let userData;
 let sleepData;
 let activityData;
 let hydrationData;
 
+// FETCHING
 userData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
   .then(data => data.json())
   .then(data => data.userData)
@@ -39,17 +36,14 @@ hydrationData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydratio
   .then(data => data.hydrationData)
   .catch(error => console.log('hydrationData error'))
 
-// We need to somehow make sure that we have access to all
-// of the methods in every class. So when we call hydration.Method(),
-// it knows what hydration is and that it's supposed to reach
-// into that class and execute a method from there.
-
+// PROMISE
 Promise.all([userData, sleepData, activityData, hydrationData])
   .then(data => {
     userData = data[0];
     sleepData = data[1];
     activityData = data[2];
     hydrationData = data[3];
+    console.log('data', userData)
   })
   .then(() => {
     userRepository = new UserRepository(userData, sleepData, activityData, hydrationData);
@@ -66,12 +60,13 @@ Promise.all([userData, sleepData, activityData, hydrationData])
     updateTrendingStepDays(user);
     displayFriendsTotalSteps(user, todayDate);
     displayUserInfo(user, todayDate);
+    sortedHydrationDataByDate(user);
   })
   .catch(error => {
     console.log('Something is amiss with promise all', error)
   });
 
-
+// INSTANTIATION
 let instantiateAllUsers = () => {
   userData.forEach(user => {
     user = new User(user);
@@ -107,92 +102,7 @@ let generateRandomUser = (dataSet) => {
   console.log(dataSet)
 }
 
-//next up//
-
-// let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
-//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
-//     return -1;
-//   }
-//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
-//     return 1;
-//   }
-//   return 0;
-// });
-
-// let updateTrendingStairsDays = (user) => {
-//   user.findTrendingStairsDays();
-//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`
-// }
-//
-// function updateTrendingStepDays() {
-//   user.findTrendingStepDays();
-//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
-// }
-//
-// for (var i = 0; i < dailyOz.length; i++) {
-//   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
-// }
-
-// function postNewSleepData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "hoursSlept": `${hours-slept-input}`,
-//         "sleepQuality": `${sleep-quality-input}`
-//     })
-//   })
-// };
-//
-// function postNewActivityData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "numSteps": `${number-of-steps-input}`,
-//         "minutesActive": `${minutes-active-input}`
-//         "flightsOfStairs": `${flights-of-stairs-input}`
-//     })
-//   })
-// };
-//
-// function postNewHydrationData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "numOunces": `${number-of-ounces-input}`
-//
-//     })
-//   })
-// };
-//
-//
-// let dailyOz = document.querySelectorAll('.daily-oz');
-let dailyOz = $('.daily-oz');
-// let dropdownFriendsStepsContainer = $('#dropdown-friends-steps-container');
-// let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
-//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
-//     return -1;
-//   }
-//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
-//     return 1;
-//   }
-//   return 0;
-// });
-
+// EVENTS
 $('main').on('click', (event) => showInfo());
 $('#profile-button').on('click', (event) => showDropdown());
 $('.stairs-trending-button').on('click', (event) => updateTrendingStairsDays)
@@ -211,6 +121,8 @@ function showDropdown() {
 // Steps, stairs, hydration, and sleep. To do this we'd likely
 // have to create four different jQuery event listeners,
 // so unsure which option is better.
+
+// EVENT HANDLERS
 function showInfo() {
   if ($(event.target).hasClass('steps-info-button')) {
     flipCard($('#steps-main-card'), $('#steps-info-card'));
@@ -287,14 +199,6 @@ let displayFriendsTotalSteps = (user, todayDate) => {
     `);
   });
 }
-//
-// for (var i = 0; i < dailyOz.length; i++) {
-//   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
-// }
-//
-
-// Maybe create a parent / handler function called 'displayUserInfo()' that is
-// called in the promise and does ALL of the below text insertions.
 
 let displayUserInfo = (user, todayDate) => {
   $('#dropdown-goal').text(`DAILY STEP GOAL | ${user.dailyStepGoal}`)
@@ -373,10 +277,112 @@ let displayUserInfo = (user, todayDate) => {
   $('#steps-user-steps-today').text(activityData.find(activity => {
     return activity.userID === user.id && activity.date === todayDate
   }).numSteps);
+
+  let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
+    console.log('oz', user.ouncesRecord);
+    if (Object.keys(a)[0] > Object.keys(b)[0]) {
+      return -1;
+    }
+    if (Object.keys(a)[0] < Object.keys(b)[0]) {
+      return 1;
+    }
+    return 0;
+  });
+
+  let weeklyHydrationDataArray = sortedHydrationDataByDate.splice(0, 7);
+  console.log('weekly', weeklyHydrationDataArray);
+  console.log('sorted', sortedHydrationDataByDate.splice(0, 7));
+  //Refactor this into a forEach
+  for (var i = 0; i < $('.daily-oz').length; i++) {
+    $('.daily-oz')[i].text(user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0]))
+  };
+  //splice sortedHydrationDataByDate to get most recent 7 entires
+  //loop through the first 7 entries and populate the oz per day
 }
 
-//
 
+// THINGS TO ADDRESS
+// TO-DO:
+  // Find and analyze the correct week's data.
+    // Find out which date is best to work with.
+  // Create a DOM element for input.
+    // Get POSTing in order.
+  // Take a look at each method for refactoring.
+
+
+// let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
+//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
+//     return -1;
+//   }
+//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
+//     return 1;
+//   }
+//   return 0;
+// });
+
+//
+// for (var i = 0; i < dailyOz.length; i++) {
+//   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
+// }
+
+// function postNewSleepData() {
+//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//         "userId": `${user-id-input}`,
+//         "date": `${date-input}`,
+//         "hoursSlept": `${hours-slept-input}`,
+//         "sleepQuality": `${sleep-quality-input}`
+//     })
+//   })
+// };
+//
+// function postNewActivityData() {
+//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//         "userId": `${user-id-input}`,
+//         "date": `${date-input}`,
+//         "numSteps": `${number-of-steps-input}`,
+//         "minutesActive": `${minutes-active-input}`
+//         "flightsOfStairs": `${flights-of-stairs-input}`
+//     })
+//   })
+// };
+//
+// function postNewHydrationData() {
+//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//         "userId": `${user-id-input}`,
+//         "date": `${date-input}`,
+//         "numOunces": `${number-of-ounces-input}`
+//
+//     })
+//   })
+// };
+//
+//
+// let dailyOz = document.querySelectorAll('.daily-oz');
+// let dailyOz = $('.daily-oz');
+// let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
+//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
+//     return -1;
+//   }
+//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
+//     return 1;
+//   }
+//   return 0;
+// });
 //
 // let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
 //
