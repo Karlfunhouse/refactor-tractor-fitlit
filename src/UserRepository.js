@@ -1,9 +1,16 @@
-import sleepData from './data/sleep';
+// import sleepData from './data/sleep';
 
+// Pass in all data upon instantiation.
 class UserRepository {
-  constructor() {
+  constructor(userData, sleepData, activityData, hydrationData) {
     this.users = [];
+    this.userData = userData
+    this.sleepData = sleepData;
+    this.activityData = activityData;
+    this.hydrationData = hydrationData;
   }
+  // This is not being called anywhere
+  // Could be used for finding friends.
   getUser(id) {
     return this.users.find(function(user) {
       return user.id === id;
@@ -83,14 +90,14 @@ class UserRepository {
     })
   }
   getLongestSleepers(date) {
-    return sleepData.filter(sleep => {
+    return this.sleepData.filter(sleep => {
       return sleep.date === date;
     }).sort((a, b) => {
       return b.hoursSlept - a.hoursSlept;
     })[0].userID;
   }
   getWorstSleepers(date) {
-    return sleepData.filter(sleep => {
+    return this.sleepData.filter(sleep => {
       return sleep.date === date;
     }).sort((a, b) => {
       return a.hoursSlept - b.hoursSlept;

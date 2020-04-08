@@ -1,3 +1,5 @@
+// User should take in a parameter for the user data 
+
  class User {
   constructor(userData) {
     this.id = userData.id;
