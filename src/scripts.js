@@ -300,15 +300,49 @@ let displayUserInfo = (user, todayDate) => {
   //loop through the first 7 entries and populate the oz per day
 }
 
+// 1 WEEK LEFT CHECKLIST:
+  // [ ] Date data (find out wtf is going on here)
+  // [ ] POSTing:
+      // [ ] Already written out by Karl - flesh it out
+      // [ ] DOM element for user input
+          // [ ] One main input with dropdown menu for different activites
+          // [ ] Four separate inputs on each card
+  // [ ] Refactor / consider each method in every class:
+      // [ ] Employ arguemnts and parameters for changing behaviors
+      // [ ] Make sure they are in places we want them to live
+  // [ ] Break up two main giant handlers:
+      // [ ] showInfo() --> maybe rename buttonHandler() and break up into:
+          // [ ] stepButtonHandler()
+          // [ ] stairButtonHandler()
+          // [ ] sleepButtonHandler()
+          // [ ] hydrationButtonHandler()
+      // [ ] displayUserInfo():
+          // [ ] displayGeneralUserInfo()
+          // [ ] displayStairData()
+          // [ ] displayStepData()
+          // [ ] displayHydrationData()
+          // [ ] displaySleepData()
+  // [ ] SCSS
+      // [ ] _index.scss (holds all imports)
+      // [ ] _variables.scss (holds all variables)
+      // [ ] other scss files for breaking up main styling?
+  // [ ] Testing with SPIES
+      // [ ] Lesson tomorrow
+      // [ ] Refactor DOM manipulation into methods on an object
+      // [ ] Spy on all DOM manipulation methods to verify that they
+      // [ ] occurred and were called with the correct arguments
+      // [ ] Use an afterEach hook to clean up spies in between tests
+  // [ ] Testing Firefox and Safari
+  // [ ] Mobile design: should work for all different screen sizes
+      // [ ] Mobile
+      // [ ] Tablets
+      // [ ] Desk monitors
+  // [ ] Accessibility
+      // [ ] Tab through app and use it with a mouse
+      // [ ] Must be viewable through color-blind extension
+      // [ ] Use Accessibility Audit to get close to a score of 100%
 
 // THINGS TO ADDRESS
-// TO-DO:
-  // Find and analyze the correct week's data.
-    // Find out which date is best to work with.
-  // Create a DOM element for input.
-    // Get POSTing in order.
-  // Take a look at each method for refactoring.
-
 
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
