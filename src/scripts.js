@@ -282,8 +282,8 @@ function displaySleepData(user, todayDate) {
       // or working with more recent data?
   // [ ] POSTing:
       // [ ] Already written out by Karl - flesh it out
-      // [ ] DOM element for user input
-          // [ ] One main input with dropdown menu for different activites
+      // [X] DOM element for user input
+          // [X] One main input with dropdown menu for different activites
       // [ ] How to populate newly posted data
   // [ ] Refactor / consider each method in every class:
       // [ ] Employ arguemnts and parameters for changing behaviors
@@ -305,7 +305,8 @@ function displaySleepData(user, todayDate) {
       // [ ] _variables.scss (holds all variables)
       // [ ] other scss files for breaking up main styling?
   // [ ] Testing with SPIES
-      // [ ] Lesson tomorrow
+      // [X] Lesson tomorrow
+      // [ ] Get initial tests passing 
       // [ ] Refactor DOM manipulation into methods on an object
       // [ ] Spy on all DOM manipulation methods to verify that they
       // [ ] occurred and were called with the correct arguments
