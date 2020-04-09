@@ -105,7 +105,8 @@ $('#steps-card-container').on('click', (event) => stepsButtonHandler());
 $('#hydration-card-container').on('click', (event) => hydrationButtonHandler());
 $('#stairs-card-container').on('click', (event) => stairsButtonHandler());
 $('#sleep-card-container').on('click', (event) => sleepButtonHandler());
-$('#profile-button').on('click', (event) => showDropdown());
+$('#profile-button').on('click', (event) => showUserDropdown());
+$('#add-data-button').on('click', (event) => showActivityDropdown());
 $('.stairs-trending-button').on('click', (event) => updateTrendingStairsDays)
 $('.steps-trending-button').on('click', (event) => updateTrendingStepDays)
 
@@ -114,9 +115,18 @@ function flipCard(cardToHide, cardToShow) {
   $(cardToShow).removeClass('hide')
 }
 
-function showDropdown() {
+function showUserDropdown() {
   $('#user-info-dropdown').toggle('hide');
-};
+}
+
+function showActivityDropdown() {
+  $('#add-data-dropdown').toggle('hide');
+}
+
+// Maybe try to break up this handler into four separate handlers
+// Steps, stairs, hydration, and sleep. To do this we'd likely
+// have to create four different jQuery event listeners,
+// so unsure which option is better.
 
 // EVENT HANDLERS
 function stepsButtonHandler() {
@@ -259,6 +269,7 @@ function displayHydrationData(user, todayDate) {
 };
 
 function displaySleepData(user, todayDate) {
+  $('.user-id-js').text(`${user.id}`)
   $('#sleep-calendar-hours-average-weekly').text(user.calculateAverageHoursThisWeek(todayDate));
   $('#sleep-calendar-quality-average-weekly').text(user.calculateAverageQualityThisWeek(todayDate));
   $('#sleep-friend-longest-sleeper').text(userRepository.users.find(user => {
@@ -276,14 +287,38 @@ function displaySleepData(user, todayDate) {
     return sleep.userID === user.id && sleep.date === todayDate
   }).hoursSlept);
 };
+
+
+  // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
+  //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
+  //     return -1;
+  //   }
+  //   if (Object.keys(a)[0] < Object.keys(b)[0]) {
+  //     return 1;
+  //   }
+  //   return 0;
+  // });
+  //
+  // let weeklyHydrationDataArray = sortedHydrationDataByDate.splice(0, 7);
+  // console.log('weekly', weeklyHydrationDataArray);
+  // console.log('sorted', sortedHydrationDataByDate.splice(0, 7));
+  // //Refactor this into a forEach
+  // for (var i = 0; i < $('.daily-oz').length; i++) {
+  //   $('.daily-oz')[i].text(user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0]))
+  // };
+  //splice sortedHydrationDataByDate to get most recent 7 entires
+  //loop through the first 7 entries and populate the oz per day
+// }
+
+
 // 1 WEEK LEFT CHECKLIST:
   // [ ] Date data (find out wtf is going on here)
       // [ ] Down the road: working with data up to 1/22
       // or working with more recent data?
   // [ ] POSTing:
       // [ ] Already written out by Karl - flesh it out
-      // [ ] DOM element for user input
-          // [ ] One main input with dropdown menu for different activites
+      // [X] DOM element for user input
+          // [X] One main input with dropdown menu for different activites
       // [ ] How to populate newly posted data
   // [ ] Refactor / consider each method in every class:
       // [ ] Employ arguemnts and parameters for changing behaviors
@@ -369,6 +404,22 @@ function displaySleepData(user, todayDate) {
 //     })
 //   })
 // };
+
+// function postNewSleepData() {
+//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//         "userId": `${user-id-input}`,
+//         "date": `${date-input}`,
+//         "hoursSlept": `${hours-slept-input}`,
+//         "sleepQuality": `${sleep-quality-input}`
+//     })
+//   })
+// };
+
 //
 // function postNewActivityData() {
 //   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
