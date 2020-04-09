@@ -8,6 +8,40 @@
   </head>
   <body>
     <header>
+      <button type='button' name='button' id='add-data-button'></button>
+      <section  class='hide' id='add-data-dropdown'>
+        <div class="top-section">
+          <h5 id='add-fitness-title'>Add New Fitness Data</h5>
+          <p class='white'>User id: <span class="user-id-js"></span></p>
+          <input type='date' class='date-input' name='date'></input>
+        </div>
+        <section class='data-inputs'>
+          <div class='dropdown-sleep'>
+            <h4 class='dropdown-category'><u>Sleep</u></h4>
+            <p class='dropdown-p black'>Hours Slept</p>
+            <input type='number' class='hours-slept-input-js data-input-field' required min='0' max='24'></input>
+            <p class='dropdown-p black'>Sleep Quality</p>
+            <input type='number' class='sleep-quality-input-js data-input-field' required min='0' max='5'></input>
+            <button type='button' name='button' class='add-activity-button-js'>Add Sleep Data</button>
+          </div>
+          <div class='dropdown-activity'>
+            <h3 class='dropdown-category'><u>Activity</u></h3>
+            <p class='dropdown-p black'>Number of steps</p>
+            <input type='number' class='number-steps-input-js data-input-field' required min='0'></input>
+            <p class='dropdown-p black'>Minutes Active</p>
+            <input type='number' class='minutes-active-input-js data-input-field' required min='0' max='1440'></input>
+            <p class='dropdown-p black'>Flights of Stairs</p>
+            <input type='number' class='flight-stairs-input-js data-input-field' required min='0'></input>
+            <button type='button' name='add activity button' class='add-activity-button-js'>Add Activity Data</button>
+          </div>
+          <div class='dropdown-hydration'>
+            <h4 class='dropdown-category'><u>Hydration</u></h4>
+            <p class='dropdown-p black'>Number of ounces</p>
+            <input type='number' class='number-ounces-input-js data-input-field' required min='0' ></input>
+            <button type='button' name='button' class='add-activity-button-js'>Add Hydration Data</button>
+          </div>
+        </section>
+      </section>
       <h1><span id='header-name'></span>FITLIT</h1>
       <button type='button' name='button' id='profile-button'></button>
       <section class='hide' id='user-info-dropdown'>
@@ -17,36 +51,6 @@
         <br/>
         <p class='dropdown-p' id='dropdown-friends'>WEEKLY STEP COMPETITION STANDINGS:</p>
         <div id='dropdown-friends-steps-container'></div>
-      </section>
-      <button type='button' name='button' id='add-data-button'></button>
-      <section  class='hide' id='add-data-dropdown'>
-        <h5 id='add-fitness-title'>Add New Fitness Data</h5>
-        <p class='dropdown-p'>User id</p>
-        <input type='date' class='dropdown-p date-input' name='date'></input>
-        <div class='dropdown-sleep'>
-          <p class='dropdown-p'>Sleep</p>
-          <p class='dropdown-p'>Hours Slept</p>
-          <input class='hours-slept-input'>#</input>
-          <p class='dropdown-p'>Sleep Quality</p>
-          <input class='sleep-quality-input'>#</input>
-          <button type='button' name='button' class='add-activity-button'>+</button>
-        </div>
-        <div class='dropdown-activity'>
-          <p class='dropdown-p'>Activity</p>
-          <p class='dropdown-p'>Number of steps</p>
-          <input class='number-steps-input'>#</input>
-          <p class='dropdown-p'>Minutes Active</p>
-          <input class='minutes-active-input'>#</input>
-          <p class='dropdown-p'>Flights of Stairs</p>
-          <input class='flight-stairs-input'>#</input>
-          <button type='button' name='button' class='add-activity-button'>+</button>
-        </div>
-        <div class='dropdown-hydration'>
-          <p class='dropdown-p'>Hydration</p>
-          <p class='dropdown-p'>Number of ounces</p>
-          <input class='number-ounces-input'>#</input>
-          <button type='button' name='button' class='add-activity-button'>+</button>
-        </div>
       </section>
     </header>
     <main>
