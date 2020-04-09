@@ -105,7 +105,8 @@ let generateRandomUser = (dataSet) => {
 
 // EVENTS
 $('main').on('click', (event) => showInfo());
-$('#profile-button').on('click', (event) => showDropdown());
+$('#profile-button').on('click', (event) => showUserDropdown());
+$('#add-data-button').on('click', (event) => showActivityDropdown());
 $('.stairs-trending-button').on('click', (event) => updateTrendingStairsDays)
 $('.steps-trending-button').on('click', (event) => updateTrendingStepDays)
 
@@ -114,8 +115,12 @@ function flipCard(cardToHide, cardToShow) {
   $(cardToShow).removeClass('hide')
 }
 
-function showDropdown() {
+function showUserDropdown() {
   $('#user-info-dropdown').toggle('hide');
+}
+
+function showActivityDropdown() {
+  $('#add-data-dropdown').toggle('hide');
 }
 
 // Maybe try to break up this handler into four separate handlers
@@ -220,6 +225,8 @@ let displayUserInfo = (user, todayDate) => {
     return hydration.userID === user.id && hydration.date === todayDate
   }).numOunces / 8);
 
+  $('.user-id-js').text(`${user.id}`)
+
   $('#sleep-calendar-hours-average-weekly').text(user.calculateAverageHoursThisWeek(todayDate));
 
   $('#sleep-calendar-quality-average-weekly').text(user.calculateAverageQualityThisWeek(todayDate));
@@ -280,7 +287,6 @@ let displayUserInfo = (user, todayDate) => {
   }).numSteps);
 
   let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
-    console.log('oz', user.ouncesRecord);
     if (Object.keys(a)[0] > Object.keys(b)[0]) {
       return -1;
     }
@@ -363,20 +369,20 @@ let displayUserInfo = (user, todayDate) => {
 //   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
 // }
 
-// function postNewSleepData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "hoursSlept": `${hours-slept-input}`,
-//         "sleepQuality": `${sleep-quality-input}`
-//     })
-//   })
-// };
+function postNewSleepData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "userId": `${user-id-input}`,
+        "date": `${date-input}`,
+        "hoursSlept": `${hours-slept-input}`,
+        "sleepQuality": `${sleep-quality-input}`
+    })
+  })
+};
 //
 // function postNewActivityData() {
 //   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
