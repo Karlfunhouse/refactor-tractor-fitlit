@@ -1,9 +1,10 @@
 *,
 *:after,
 *:before {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -14,8 +15,7 @@ body {
 /* HEADER */
 header {
   text-align: center;
-  height: 15em;
-  // position: relative;
+  height: 9vw;
 }
 
 button:active {
@@ -29,11 +29,10 @@ button:active {
   background-size: 5.6vw;
   border: none;
   display: inline;
-  // float: right;
+  float: right;
   height: 5.6vw;
-  // margin-right: .5vw;
+  margin-right: .5vw;
   margin-top: 1.6vw;
-  // position: fixed;
   width: 5.6vw;
 }
 
@@ -43,11 +42,10 @@ button:active {
   background-size: 5.6vw;
   border: none;
   display: inline;
-  // float: left;
+  float: left;
   height: 5.6vw;
   margin-left: 1vw;
   margin-top: 1.6vw;
-  // position: fixed;
   width: 5.6vw;
 }
 
@@ -74,25 +72,33 @@ button:active {
 .dropdown-sleep {
   background-color: #FBD089;
   border-color: red 2px solid;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-}
-.title-p {
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .dropdown-activity {
   background-color: #F5634B;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .dropdown-hydration {
   background-color: #54C6BE;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
-
 
 .dropdown-p {
   font-size: 1.2vw;
@@ -148,25 +154,39 @@ p {
 
 /* MAIN */
 main {
+  display: -ms-grid;
   display: grid;
-  grid-template-areas:
-  'steps hydration'
-  'stairs sleep';
+      grid-template-areas: 'steps hydration' 'stairs sleep';
   height: 100%;
 }
 
 .main-card {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   height: 20vw;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .main-card-top-row {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 100%;
 }
 
@@ -177,31 +197,43 @@ main {
 
 #steps-card-container {
   background-color: #F5634B;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: steps;
   margin: .5vw;
 }
 
 #hydration-card-container {
   background-color: #54C6BE;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: hydration;
   margin: .5vw;
 }
 
 #stairs-card-container {
   background-color: #8975B2;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
   grid-area: stairs;
   margin: .5vw;
 }
 
 #sleep-card-container {
   background-color: #FBD089;
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
   grid-area: sleep;
   margin: .5vw;
 }
 
 .card-data-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-bottom: 2vw;
 }
 
@@ -215,8 +247,12 @@ main {
 }
 
 .hydration-data-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-bottom: .2vw;
 }
 
@@ -340,7 +376,6 @@ main {
   background-image: url(../images/sleep-calendar.png);
 }
 
-
 .steps-trending-button {
   background-image: url(../images/steps-trending.png);
 }
@@ -365,3 +400,4 @@ main {
 .yellow-text {
   color: #F8BA00;
 }
+/*# sourceMappingURL=styles.css.map */
