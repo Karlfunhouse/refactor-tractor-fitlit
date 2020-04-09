@@ -8,11 +8,21 @@
   </head>
   <body>
     <header>
+      <h1><span id='header-name'></span>FITLIT</h1>
+      <button type='button' name='button' id='profile-button'></button>
+      <section class='hide' id='user-info-dropdown'>
+        <h5 id='dropdown-name'></h5>
+        <p class='dropdown-p' id='dropdown-email'></p>
+        <p class='dropdown-p' id='dropdown-goal'></p>
+        <br/>
+        <p class='dropdown-p' id='dropdown-friends'>WEEKLY STEP COMPETITION STANDINGS:</p>
+        <div id='dropdown-friends-steps-container'></div>
+      </section>
       <button type='button' name='button' id='add-data-button'></button>
       <section  class='hide' id='add-data-dropdown'>
         <h5 id='add-fitness-title'>Add New Fitness Data</h5>
         <p class='dropdown-p'>User id</p>
-        <input type='date' class='dropdown-p' name='date'></input>
+        <input type='date' class='dropdown-p date-input' name='date'></input>
         <div class='dropdown-sleep'>
           <p class='dropdown-p'>Sleep</p>
           <p class='dropdown-p'>Hours Slept</p>
@@ -37,16 +47,6 @@
           <input class='number-ounces-input'>#</input>
           <button type='button' name='button' class='add-activity-button'>+</button>
         </div>
-      </section>
-      <h1><span id='header-name'></span>FITLIT</h1>
-      <button type='button' name='button' id='profile-button'></button>
-      <section class='hide' id='user-info-dropdown'>
-        <h5 id='dropdown-name'></h5>
-        <p class='dropdown-p' id='dropdown-email'></p>
-        <p class='dropdown-p' id='dropdown-goal'></p>
-        <br/>
-        <p class='dropdown-p' id='dropdown-friends'>WEEKLY STEP COMPETITION STANDINGS:</p>
-        <div id='dropdown-friends-steps-container'></div>
       </section>
     </header>
     <main>

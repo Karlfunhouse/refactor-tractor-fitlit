@@ -65,8 +65,28 @@ button:active {
   margin-top: -1.2%;
   position: relative;
   text-align: center;
-  z-index: 100;
+  z-index: 200;
 }
+
+.dropdown-sleep {
+  background-color: #FBD089;
+  border-color: red 2px solid;
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-activity {
+  background-color: #F5634B;
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-hydration {
+  background-color: #54C6BE;
+  display: flex;
+  justify-content: center;
+}
+
 
 .dropdown-p {
   font-size: 1.2vw;
