@@ -85,147 +85,147 @@ h5 {
   text-align: center;
 }
 
-p {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.2vw;
-  font-weight: 600;
-  letter-spacing: .2vw;
-  margin-right: 1vw;
-  padding-top: 2vw;
-  text-align: right;
-  width: 9vw;
-  word-break: keep-all;
-}
+// p {
+//   font-family: 'Work Sans', sans-serif;
+//   font-size: 1.2vw;
+//   font-weight: 600;
+//   letter-spacing: .2vw;
+//   margin-right: 1vw;
+//   padding-top: 2vw;
+//   text-align: right;
+//   width: 9vw;
+//   word-break: keep-all;
+// }
 
 /* MAIN */
-main {
-  display: grid;
-  grid-template-areas:
-  'steps hydration'
-  'stairs sleep';
-  height: 100%;
-}
+// main {
+//   display: grid;
+//   grid-template-areas:
+//   'steps hydration'
+//   'stairs sleep';
+//   height: 100%;
+// }
 
-.main-card {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 20vw;
-  justify-content: center;
-}
+// .main-card {
+//   align-items: center;
+//   display: flex;
+//   flex-direction: column;
+//   height: 20vw;
+//   justify-content: center;
+// }
 
-.main-card-top-row {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
+// .main-card-top-row {
+//   align-items: center;
+//   display: flex;
+//   justify-content: space-between;
+//   width: 100%;
+// }
+//
+// .main-card-bottom-row {
+//   text-align: center;
+//   width: 100%;
+// }
 
-.main-card-bottom-row {
-  text-align: center;
-  width: 100%;
-}
-
-#steps-card-container {
-  background-color: #F5634B;
-  grid-area: steps;
-  margin: .5vw;
-}
-
-#hydration-card-container {
-  background-color: #54C6BE;
-  grid-area: hydration;
-  margin: .5vw;
-}
-
-#stairs-card-container {
-  background-color: #8975B2;
-  grid-area: stairs;
-  margin: .5vw;
-}
-
-#sleep-card-container {
-  background-color: #FBD089;
-  grid-area: sleep;
-  margin: .5vw;
-}
-
-.card-data-line {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2vw;
-}
-
-.hydration-weekly-label {
-  font-size: 1vw;
-  padding-top: 1vw;
-}
-
-.hydration-weekly-amount {
-  font-size: 2vw;
-}
-
-.hydration-data-line {
-  display: flex;
-  justify-content: center;
-  margin-bottom: .2vw;
-}
-
-.trend-line {
-  font-size: 2vw;
-  text-align: center;
-  width: 20vw;
-}
+// #steps-card-container {
+//   background-color: #F5634B;
+//   grid-area: steps;
+//   margin: .5vw;
+// }
+//
+// #hydration-card-container {
+//   background-color: #54C6BE;
+//   grid-area: hydration;
+//   margin: .5vw;
+// }
+//
+// #stairs-card-container {
+//   background-color: #8975B2;
+//   grid-area: stairs;
+//   margin: .5vw;
+// }
+//
+// #sleep-card-container {
+//   background-color: #FBD089;
+//   grid-area: sleep;
+//   margin: .5vw;
+// }
+//
+// .card-data-line {
+//   display: flex;
+//   justify-content: center;
+//   margin-bottom: 2vw;
+// }
+//
+// .hydration-weekly-label {
+//   font-size: 1vw;
+//   padding-top: 1vw;
+// }
+//
+// .hydration-weekly-amount {
+//   font-size: 2vw;
+// }
+//
+// .hydration-data-line {
+//   display: flex;
+//   justify-content: center;
+//   margin-bottom: .2vw;
+// }
+//
+// .trend-line {
+//   font-size: 2vw;
+//   text-align: center;
+//   width: 20vw;
+// }
 
 /* BUTTONS */
-.info-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
-  display: inline;
-  height: 3.4vw;
-  margin-left: 1vw;
-  width: 3.4vw;
-}
-
-.friends-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
-  display: inline;
-  height: 3.4vw;
-  margin-right: 1vw;
-  width: 3.4vw;
-}
-
-.calendar-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
-  display: inline;
-  float: right;
-  height: 3.4vw;
-  margin-right: 1vw;
-  width: 3.4vw;
-}
-
-.trending-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
-  height: 3.4vw;
-  margin-left: 1vw;
-  width: 3.4vw;
-}
-
-.go-back-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
-  height: 3.4vw;
-  margin-left: 1vw;
-  width: 3.4vw;
-}
+// .info-button {
+//   background-position: center;
+//   background-size: 3.4vw;
+//   border: none;
+//   display: inline;
+//   height: 3.4vw;
+//   margin-left: 1vw;
+//   width: 3.4vw;
+// }
+//
+// .friends-button {
+//   background-position: center;
+//   background-size: 3.4vw;
+//   border: none;
+//   display: inline;
+//   height: 3.4vw;
+//   margin-right: 1vw;
+//   width: 3.4vw;
+// }
+//
+// .calendar-button {
+//   background-position: center;
+//   background-size: 3.4vw;
+//   border: none;
+//   display: inline;
+//   float: right;
+//   height: 3.4vw;
+//   margin-right: 1vw;
+//   width: 3.4vw;
+// }
+//
+// .trending-button {
+//   background-position: center;
+//   background-size: 3.4vw;
+//   border: none;
+//   height: 3.4vw;
+//   margin-left: 1vw;
+//   width: 3.4vw;
+// }
+//
+// .go-back-button {
+//   background-position: center;
+//   background-size: 3.4vw;
+//   border: none;
+//   height: 3.4vw;
+//   margin-left: 1vw;
+//   width: 3.4vw;
+// }
 
 .steps-go-back-button {
   background-image: url(../images/steps-goback.png);
@@ -301,18 +301,299 @@ main {
 }
 
 /* CHANGING CLASSES */
-.hide {
-  display: none;
+// .hide {
+//   display: none;
+// }
+//
+// .green-text {
+//   color: green;
+// }
+//
+// .red-text {
+//   color: red;
+// }
+//
+// .yellow-text {
+//   color: #F8BA00;
+// }
+
+/* MEDIA QUERIES */
+@media screen and (min-width: 1001px) {
+  main {
+    display: grid;
+    grid-template-areas:
+    'steps hydration'
+    'stairs sleep';
+    height: 100%;
+  }
+  .main-card {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 20vw;
+    justify-content: center;
+  }
+  .main-card-top-row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .main-card-bottom-row {
+    text-align: center;
+    width: 100%;
+  }
+  #steps-card-container {
+    background-color: #F5634B;
+    grid-area: steps;
+    margin: .5vw;
+  }
+
+  #hydration-card-container {
+    background-color: #54C6BE;
+    grid-area: hydration;
+    margin: .5vw;
+  }
+
+  #stairs-card-container {
+    background-color: #8975B2;
+    grid-area: stairs;
+    margin: .5vw;
+  }
+
+  #sleep-card-container {
+    background-color: #FBD089;
+    grid-area: sleep;
+    margin: .5vw;
+  }
+
+  .card-data-line {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vw;
+  }
+
+  .hydration-weekly-label {
+    font-size: 1vw;
+    padding-top: 1vw;
+  }
+
+  .hydration-weekly-amount {
+    font-size: 2vw;
+  }
+
+  .hydration-data-line {
+    display: flex;
+    justify-content: center;
+    margin-bottom: .2vw;
+  }
+
+  .trend-line {
+    font-size: 2vw;
+    text-align: center;
+    width: 20vw;
+  }
+  .info-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    display: inline;
+    height: 3.4vw;
+    margin-left: 1vw;
+    width: 3.4vw;
+  }
+
+  .friends-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    display: inline;
+    height: 3.4vw;
+    margin-right: 1vw;
+    width: 3.4vw;
+  }
+
+  .calendar-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    display: inline;
+    float: right;
+    height: 3.4vw;
+    margin-right: 1vw;
+    width: 3.4vw;
+  }
+
+  .trending-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    height: 3.4vw;
+    margin-left: 1vw;
+    width: 3.4vw;
+  }
+
+  .go-back-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    height: 3.4vw;
+    margin-left: 1vw;
+    width: 3.4vw;
+  }
+  .hide {
+    display: none;
+  }
+
+  .green-text {
+    color: green;
+  }
+
+  .red-text {
+    color: red;
+  }
+
+  .yellow-text {
+    color: #F8BA00;
+  }
 }
 
-.green-text {
-  color: green;
-}
+@media screen and (max-width: 1000px) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+  .main-card {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 35vw;
+    width: 100%;
+    justify-content: center;
+  }
+  .main-card-top-row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-.red-text {
-  color: red;
-}
+  .main-card-bottom-row {
+    text-align: center;
+    width: 100%;
+  }
+  #steps-card-container {
+    background-color: #F5634B;
+    grid-area: steps;
+    margin: .5vw;
+  }
 
-.yellow-text {
-  color: #F8BA00;
+  #hydration-card-container {
+    background-color: #54C6BE;
+    grid-area: hydration;
+    margin: .5vw;
+  }
+
+  #stairs-card-container {
+    background-color: #8975B2;
+    grid-area: stairs;
+    margin: .5vw;
+  }
+
+  #sleep-card-container {
+    background-color: #FBD089;
+    grid-area: sleep;
+    margin: .5vw;
+  }
+
+  .card-data-line {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vw;
+  }
+
+  .hydration-weekly-label {
+    font-size: 1vw;
+    padding-top: 1vw;
+  }
+
+  .hydration-weekly-amount {
+    font-size: 2vw;
+  }
+
+  .hydration-data-line {
+    display: flex;
+    justify-content: center;
+    margin-bottom: .2vw;
+  }
+
+  .trend-line {
+    font-size: 2vw;
+    text-align: center;
+    width: 20vw;
+  }
+  .info-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    display: inline;
+    height: 3.4vw;
+    margin-left: 1vw;
+    width: 3.4vw;
+  }
+
+  .friends-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    display: inline;
+    height: 3.4vw;
+    margin-right: 1vw;
+    width: 3.4vw;
+  }
+
+  .calendar-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    display: inline;
+    float: right;
+    height: 3.4vw;
+    margin-right: 1vw;
+    width: 3.4vw;
+  }
+
+  .trending-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    height: 3.4vw;
+    margin-left: 1vw;
+    width: 3.4vw;
+  }
+
+  .go-back-button {
+    background-position: center;
+    background-size: 3.4vw;
+    border: none;
+    height: 3.4vw;
+    margin-left: 1vw;
+    width: 3.4vw;
+  }
+  .hide {
+    display: none;
+  }
+
+  .green-text {
+    color: green;
+  }
+
+  .red-text {
+    color: red;
+  }
+
+  .yellow-text {
+    color: #F8BA00;
+  }
 }
