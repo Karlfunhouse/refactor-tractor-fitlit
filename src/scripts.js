@@ -105,17 +105,96 @@ $('#steps-card-container').on('click', (event) => stepsButtonHandler());
 $('#hydration-card-container').on('click', (event) => hydrationButtonHandler());
 $('#stairs-card-container').on('click', (event) => stairsButtonHandler());
 $('#sleep-card-container').on('click', (event) => sleepButtonHandler());
-$('#profile-button').on('click', (event) => showDropdown());
+$('#profile-button').on('click', (event) => showUserDropdown());
+$('#add-data-button').on('click', (event) => showActivityDropdown());
 $('.stairs-trending-button').on('click', (event) => updateTrendingStairsDays)
 $('.steps-trending-button').on('click', (event) => updateTrendingStepDays)
+$('.add-sleep-button-js').on('click', (event) => postNewSleepData())
+$('.add-activity-button-js').on('click', (event) => postNewActivityData())
+$('.add-hydration-button-js').on('click', (event) => postNewHydrationData())
 
 function flipCard(cardToHide, cardToShow) {
   $(cardToHide).addClass('hide');
   $(cardToShow).removeClass('hide')
 }
 
-function showDropdown() {
+function showUserDropdown() {
   $('#user-info-dropdown').toggle('hide');
+}
+
+function showActivityDropdown() {
+  $('#add-data-dropdown').toggle('hide');
+}
+
+// Maybe try to break up this handler into four separate handlers
+// Steps, stairs, hydration, and sleep. To do this we'd likely
+// have to create four different jQuery event listeners,
+// so unsure which option is better.
+
+function postNewSleepData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "userID": Number($('.user-id-js').text()),
+      "date": $('.date-input').val().split('-').join('/'),
+      "hoursSlept": Number($('.hours-slept-input-js').val()),
+      "sleepQuality": Number($('.sleep-quality-input-js').val())
+    })
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+};
+
+function postNewActivityData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "userID": Number($('.user-id-js').text()),
+        "date": $('.date-input').val().split('-').join('/'),
+        "numSteps": Number($('.number-steps-input-js').val()),
+        "minutesActive": Number($('.minutes-active-input-js').val()),
+        "flightsOfStairs": Number($('.flight-stairs-input-js').val())
+    })
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+};
+
+function postNewHydrationData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "userID": Number($('.user-id-js').text()),
+        "date": $('.date-input').val().split('-').join('/'),
+        "numOunces": Number($('.number-ounces-input-js').val())
+    })
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 };
 
 // EVENT HANDLERS
@@ -259,6 +338,7 @@ function displayHydrationData(user, todayDate) {
 };
 
 function displaySleepData(user, todayDate) {
+  $('.user-id-js').text(`${user.id}`)
   $('#sleep-calendar-hours-average-weekly').text(user.calculateAverageHoursThisWeek(todayDate));
   $('#sleep-calendar-quality-average-weekly').text(user.calculateAverageQualityThisWeek(todayDate));
   $('#sleep-friend-longest-sleeper').text(userRepository.users.find(user => {
@@ -276,6 +356,30 @@ function displaySleepData(user, todayDate) {
     return sleep.userID === user.id && sleep.date === todayDate
   }).hoursSlept);
 };
+
+
+  // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
+  //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
+  //     return -1;
+  //   }
+  //   if (Object.keys(a)[0] < Object.keys(b)[0]) {
+  //     return 1;
+  //   }
+  //   return 0;
+  // });
+  //
+  // let weeklyHydrationDataArray = sortedHydrationDataByDate.splice(0, 7);
+  // console.log('weekly', weeklyHydrationDataArray);
+  // console.log('sorted', sortedHydrationDataByDate.splice(0, 7));
+  // //Refactor this into a forEach
+  // for (var i = 0; i < $('.daily-oz').length; i++) {
+  //   $('.daily-oz')[i].text(user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0]))
+  // };
+  //splice sortedHydrationDataByDate to get most recent 7 entires
+  //loop through the first 7 entries and populate the oz per day
+// }
+
+
 // 1 WEEK LEFT CHECKLIST:
   // [X] Date data (find out wtf is going on here)
       // [X] Down the road: working with data up to 1/22
@@ -338,6 +442,9 @@ function displaySleepData(user, todayDate) {
 //   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
 // }
 
+
+
+
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
 //     return -1;
@@ -355,52 +462,8 @@ function displaySleepData(user, todayDate) {
 // };
 // //splice sortedHydrationDataByDate to get most recent 7 entires
 // //loop through the first 7 entries and populate the oz per day
+//
 
-// function postNewSleepData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "hoursSlept": `${hours-slept-input}`,
-//         "sleepQuality": `${sleep-quality-input}`
-//     })
-//   })
-// };
-//
-// function postNewActivityData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "numSteps": `${number-of-steps-input}`,
-//         "minutesActive": `${minutes-active-input}`
-//         "flightsOfStairs": `${flights-of-stairs-input}`
-//     })
-//   })
-// };
-//
-// function postNewHydrationData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "numOunces": `${number-of-ounces-input}`
-//
-//     })
-//   })
-// };
 //
 //
 // let dailyOz = document.querySelectorAll('.daily-oz');
