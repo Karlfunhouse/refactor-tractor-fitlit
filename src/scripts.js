@@ -11,7 +11,6 @@ import $ from 'jquery';
 // GLOBALS
 let userRepository;
 let userData;
-let user;
 let sleepData;
 let activityData;
 let hydrationData;
@@ -62,10 +61,6 @@ Promise.all([userData, sleepData, activityData, hydrationData])
     displayFriendsTotalSteps(user, todayDate);
     displayUserInfo(user, todayDate);
     // sortedHydrationDataByDate(user);
-  })
-  .then(() => {
-    // console.log('userData', UserRepository.getUser($('.user-id-js').val()));
-
   })
   .catch(error => {
     console.log('Something is amiss with promise all', error)
@@ -135,8 +130,6 @@ function showActivityDropdown() {
 // Steps, stairs, hydration, and sleep. To do this we'd likely
 // have to create four different jQuery event listeners,
 // so unsure which option is better.
-
-
 
 function postNewSleepData() {
   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
