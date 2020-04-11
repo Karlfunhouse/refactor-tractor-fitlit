@@ -52,7 +52,7 @@ Promise.all([userData, sleepData, activityData, hydrationData])
     instantiateAllUsersSleep();
   })
   .then(() => {
-    user = userRepository.users[Math.floor(Math.random() * userRepository.users.length)]
+    let user = userRepository.users[Math.floor(Math.random() * userRepository.users.length)]
     let todayDate = "2020/01/22";
     console.log(user);
     user.findFriendsNames(userRepository.users);
@@ -381,11 +381,11 @@ function displaySleepData(user, todayDate) {
 
 
 // 1 WEEK LEFT CHECKLIST:
-  // [ ] Date data (find out wtf is going on here)
-      // [ ] Down the road: working with data up to 1/22
+  // [X] Date data (find out wtf is going on here)
+      // [X] Down the road: working with data up to 1/22
       // or working with more recent data?
-  // [ ] POSTing:
-      // [ ] Already written out by Karl - flesh it out
+  // [X] POSTing:
+      // [X] Already written out by Karl - flesh it out
       // [X] DOM element for user input
           // [X] One main input with dropdown menu for different activites
       // [ ] How to populate newly posted data
@@ -405,20 +405,21 @@ function displaySleepData(user, todayDate) {
           // [X] displayHydrationData()
           // [X] displaySleepData()
   // [ ] SCSS
-      // [ ] _index.scss (holds all imports)
-      // [ ] _variables.scss (holds all variables)
-      // [ ] other scss files for breaking up main styling?
+      // [ ] base.scss (holds all imports & variables)
+      // [ ] styles.scss (holds all styling using variables)
   // [ ] Testing with SPIES
-      // [ ] Lesson tomorrow
+      // [X] Lesson on SPIES
+      // [ ] Get initial tests passing
       // [ ] Refactor DOM manipulation into methods on an object
       // [ ] Spy on all DOM manipulation methods to verify that they
       // [ ] occurred and were called with the correct arguments
       // [ ] Use an afterEach hook to clean up spies in between tests
   // [ ] Testing Firefox and Safari
-  // [ ] Mobile design: should work for all different screen sizes
-      // [ ] Mobile
-      // [ ] Tablets
-      // [ ] Desk monitors
+  // [X] Mobile design: should work for all different screen sizes
+      // [X] Mobile
+      // [X] Tablets
+      // [X] Desk monitors
+      // [ ] Remove common properties from rules at each breakpoint
   // [ ] Accessibility
       // [ ] Tab through app and use it with a mouse
       // [ ] Must be viewable through color-blind extension
