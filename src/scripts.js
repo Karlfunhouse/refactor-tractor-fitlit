@@ -115,8 +115,8 @@ $('#add-data-button').on('click', (event) => showActivityDropdown());
 $('.stairs-trending-button').on('click', (event) => updateTrendingStairsDays)
 $('.steps-trending-button').on('click', (event) => updateTrendingStepDays)
 $('.add-sleep-button-js').on('click', (event) => postNewSleepData())
-$('.add-activity-button-js').on('click', (event) => postNewActivityData)
-$('.add-hydration-button-js').on('click', (event) => postNewHydrationData)
+$('.add-activity-button-js').on('click', (event) => postNewActivityData())
+$('.add-hydration-button-js').on('click', (event) => postNewHydrationData())
 
 function flipCard(cardToHide, cardToShow) {
   $(cardToHide).addClass('hide');
@@ -167,13 +167,20 @@ function postNewActivityData() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        "userId": `${user-id-input}`,
-        "date": `${date-input}`,
-        "numSteps": `${number-of-steps-input}`,
-        "minutesActive": `${minutes-active-input}`
-        "flightsOfStairs": `${flights-of-stairs-input}`
+        "userID": Number($('.user-id-js').text()),
+        "date": $('.date-input').val().split('-').join('/'),
+        "numSteps": Number($('.number-steps-input-js').val()),
+        "minutesActive": Number($('.minutes-active-input-js').val()),
+        "flightsOfStairs": Number($('.flight-stairs-input-js').val())
     })
   })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 };
 
 function postNewHydrationData() {
@@ -183,12 +190,18 @@ function postNewHydrationData() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        "userId": `${user-id-input}`,
-        "date": `${date-input}`,
-        "numOunces": `${number-of-ounces-input}`
-
+        "userID": Number($('.user-id-js').text()),
+        "date": $('.date-input').val().split('-').join('/'),
+        "numOunces": Number($('.number-ounces-input-js').val())
     })
   })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 };
 
 // EVENT HANDLERS
