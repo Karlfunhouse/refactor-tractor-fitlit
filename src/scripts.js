@@ -109,6 +109,9 @@ $('#profile-button').on('click', (event) => showUserDropdown());
 $('#add-data-button').on('click', (event) => showActivityDropdown());
 $('.stairs-trending-button').on('click', (event) => updateTrendingStairsDays)
 $('.steps-trending-button').on('click', (event) => updateTrendingStepDays)
+$('.add-sleep-button-js').on('click', (event) => addNewSleepData)
+$('.add-activity-button-js').on('click', (event) => addNewActivityData)
+$('.add-hydration-button-js').on('click', (event) => addNewHydrationData)
 
 function flipCard(cardToHide, cardToShow) {
   $(cardToHide).addClass('hide');
@@ -376,10 +379,10 @@ function postNewSleepData() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        "userId": `${user-id-input}`,
-        "date": `${date-input}`,
-        "hoursSlept": `${hours-slept-input}`,
-        "sleepQuality": `${sleep-quality-input}`
+        "userId": `${user.id}`,
+        "date": $('.date-input').value,
+        "hoursSlept": $('.hours-slept-input-js').value.split('-').join('/')',
+        "sleepQuality": $('.sleep-quality-input-js').value
     })
   })
 };
