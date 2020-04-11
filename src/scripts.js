@@ -11,6 +11,7 @@ import $ from 'jquery';
 // GLOBALS
 let userRepository;
 let userData;
+let user;
 let sleepData;
 let activityData;
 let hydrationData;
@@ -52,7 +53,7 @@ Promise.all([userData, sleepData, activityData, hydrationData])
     instantiateAllUsersSleep();
   })
   .then(() => {
-    let user = userRepository.users[Math.floor(Math.random() * userRepository.users.length)]
+    user = userRepository.users[Math.floor(Math.random() * userRepository.users.length)]
     let todayDate = "2020/01/22";
     console.log(user);
     user.findFriendsNames(userRepository.users);
@@ -61,6 +62,10 @@ Promise.all([userData, sleepData, activityData, hydrationData])
     displayFriendsTotalSteps(user, todayDate);
     displayUserInfo(user, todayDate);
     // sortedHydrationDataByDate(user);
+  })
+  .then(() => {
+    // console.log('userData', UserRepository.getUser($('.user-id-js').val()));
+
   })
   .catch(error => {
     console.log('Something is amiss with promise all', error)
@@ -109,9 +114,9 @@ $('#profile-button').on('click', (event) => showUserDropdown());
 $('#add-data-button').on('click', (event) => showActivityDropdown());
 $('.stairs-trending-button').on('click', (event) => updateTrendingStairsDays)
 $('.steps-trending-button').on('click', (event) => updateTrendingStepDays)
-$('.add-sleep-button-js').on('click', (event) => addNewSleepData)
-$('.add-activity-button-js').on('click', (event) => addNewActivityData)
-$('.add-hydration-button-js').on('click', (event) => addNewHydrationData)
+$('.add-sleep-button-js').on('click', (event) => postNewSleepData())
+$('.add-activity-button-js').on('click', (event) => postNewActivityData)
+$('.add-hydration-button-js').on('click', (event) => postNewHydrationData)
 
 function flipCard(cardToHide, cardToShow) {
   $(cardToHide).addClass('hide');
@@ -130,6 +135,61 @@ function showActivityDropdown() {
 // Steps, stairs, hydration, and sleep. To do this we'd likely
 // have to create four different jQuery event listeners,
 // so unsure which option is better.
+
+
+
+function postNewSleepData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "userID": Number($('.user-id-js').text()),
+      "date": $('.date-input').val().split('-').join('/'),
+      "hoursSlept": Number($('.hours-slept-input-js').val()),
+      "sleepQuality": Number($('.sleep-quality-input-js').val())
+    })
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+};
+
+function postNewActivityData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "userId": `${user-id-input}`,
+        "date": `${date-input}`,
+        "numSteps": `${number-of-steps-input}`,
+        "minutesActive": `${minutes-active-input}`
+        "flightsOfStairs": `${flights-of-stairs-input}`
+    })
+  })
+};
+
+function postNewHydrationData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "userId": `${user-id-input}`,
+        "date": `${date-input}`,
+        "numOunces": `${number-of-ounces-input}`
+
+    })
+  })
+};
 
 // EVENT HANDLERS
 function stepsButtonHandler() {
@@ -376,20 +436,7 @@ function displaySleepData(user, todayDate) {
 // }
 
 
-function postNewSleepData() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        "userId": `${user.id}`,
-        "date": $('.date-input').value,
-        "hoursSlept": $('.hours-slept-input-js').value.split('-').join('/')',
-        "sleepQuality": $('.sleep-quality-input-js').value
-    })
-  })
-};
+
 
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
@@ -408,68 +455,8 @@ function postNewSleepData() {
 // };
 // //splice sortedHydrationDataByDate to get most recent 7 entires
 // //loop through the first 7 entries and populate the oz per day
-
-// function postNewSleepData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "hoursSlept": `${hours-slept-input}`,
-//         "sleepQuality": `${sleep-quality-input}`
-//     })
-//   })
-// };
-
-// function postNewSleepData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "hoursSlept": `${hours-slept-input}`,
-//         "sleepQuality": `${sleep-quality-input}`
-//     })
-//   })
-// };
-
 //
-// function postNewActivityData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "numSteps": `${number-of-steps-input}`,
-//         "minutesActive": `${minutes-active-input}`
-//         "flightsOfStairs": `${flights-of-stairs-input}`
-//     })
-//   })
-// };
-//
-// function postNewHydrationData() {
-//   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "userId": `${user-id-input}`,
-//         "date": `${date-input}`,
-//         "numOunces": `${number-of-ounces-input}`
-//
-//     })
-//   })
-// };
+
 //
 //
 // let dailyOz = document.querySelectorAll('.daily-oz');
