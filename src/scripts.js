@@ -380,6 +380,8 @@ function displaySleepData(user, todayDate) {
 // }
 
 
+
+
 // 1 WEEK LEFT CHECKLIST:
   // [X] Date data (find out wtf is going on here)
       // [X] Down the road: working with data up to 1/22

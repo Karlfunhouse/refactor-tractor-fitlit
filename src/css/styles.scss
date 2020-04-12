@@ -134,9 +134,8 @@ h4 {
 }
 
 .main-card-top-row {
+  @include flex-container(space-between);
   align-items: center;
-  display: flex;
-  justify-content: space-between;
   width: 100%;
 }
 
@@ -146,31 +145,24 @@ h4 {
 }
 
 #steps-card-container {
-  @include card-container(#F5634B, steps, 0.5vw);
+  @include card-container(#F5634B, steps);
 }
 
 #hydration-card-container {
-  @include card-container(#54C6BE, hydration, 0.5vw);
-  // background-color: #54C6BE;
-  // grid-area: hydration;
-  // margin: 0.5vw;
+  @include card-container(#54C6BE, hydration);
 }
 
 #stairs-card-container {
-  background-color: #8975B2;
-  grid-area: stairs;
-  margin: 0.5vw;
+  @include card-container(#8975B2, stairs);
+
 }
 
 #sleep-card-container {
-  background-color: #FBD089;
-  grid-area: sleep;
-  margin: 0.5vw;
+  @include card-container(#FBD089, sleep);
 }
 
 .hydration-data-line {
-  display: flex;
-  justify-content: center;
+  @include flex-container(center);
   margin-bottom: 0.2vw;
 }
 
