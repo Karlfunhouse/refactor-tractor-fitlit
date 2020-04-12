@@ -1,3 +1,5 @@
+@import 'base';
+
 *,
 *:after,
 *:before {
@@ -8,7 +10,7 @@
 }
 
 body {
-  background-color: #1F1F1F;
+  background-color: $primary-background;
 }
 
 /* HEADER */
@@ -24,28 +26,12 @@ button:active {
 
 #profile-button {
   background-image: url("../images/profile.png");
-  background-position: center;
-  background-size: 5.6vw;
-  border: none;
-  display: inline;
-  height: 5.6vw;
-  margin-right: 0.5vw;
-  margin-left: 10vw;
-  margin-top: 1.6vw;
-  width: 5.6vw;
+  @include header-button(10vw, 0.5vw);
 }
 
 #add-data-button {
   background-image: url("../images/plus.png");
-  background-position: center;
-  background-size: 5.6vw;
-  border: none;
-  display: inline;
-  height: 5.6vw;
-  margin-left: 1vw;
-  margin-right: 10vw;
-  margin-top: 1.6vw;
-  width: 5.6vw;
+  @include header-button(1vw, 10vw);
 }
 
 .data-inputs {
@@ -61,8 +47,7 @@ button:active {
 }
 
 .date-input {
-  width: 300px;
-  height: 25px;
+  @include height-and-width(25px, 300px);
   margin: 2% 0;
 }
 
@@ -121,16 +106,13 @@ button:active {
 }
 
 .data-input-field {
-  display: flex;
-  justify-content: center;
-  height: 25px;
-  width: 60px;
+  @include flex-container(center);
+  @include height-and-width(25px, 60px);
   margin-bottom: 2%;
 }
 
 .add-activity-button-js {
-  width: 120px;
-  height: 25px;
+  @include height-and-width(25px, 120px);
   margin-bottom: 2%;
 }
 /* TEXT ELEMENTS */
@@ -146,9 +128,8 @@ h4 {
 }
 
 .card-data-line {
-  display: flex;
+  @include flex-container(center);
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
