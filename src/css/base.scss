@@ -25,3 +25,9 @@ $primary-background: #1F1F1F;
   margin-top: 1.6vw;
   width: 5.6vw;
 }
+
+@mixin card-container($background-color, $grid-area, $margin) {
+  background-color: $background-color;
+  grid-area: $grid-area;
+  margin: $margin;
+}

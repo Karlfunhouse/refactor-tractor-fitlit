@@ -146,15 +146,14 @@ h4 {
 }
 
 #steps-card-container {
-  background-color: #F5634B;
-  grid-area: steps;
-  margin: 0.5vw;
+  @include card-container(#F5634B, steps, 0.5vw);
 }
 
 #hydration-card-container {
-  background-color: #54C6BE;
-  grid-area: hydration;
-  margin: 0.5vw;
+  @include card-container(#54C6BE, hydration, 0.5vw);
+  // background-color: #54C6BE;
+  // grid-area: hydration;
+  // margin: 0.5vw;
 }
 
 #stairs-card-container {
