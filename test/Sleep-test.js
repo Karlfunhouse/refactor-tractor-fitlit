@@ -8,6 +8,9 @@ describe('Sleep', function() {
   let sleep;
   let user1;
   let user2;
+  let sleep1;
+  let sleep2;
+  let sleep3;
   let userRepository;
   beforeEach(() => {
     user1 = new User({

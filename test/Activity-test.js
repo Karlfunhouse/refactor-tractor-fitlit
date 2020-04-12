@@ -6,7 +6,16 @@ import User from '../src/User';
 describe('Activity', function() {
   let activity;
   let user;
+  let user1;
+  let user2;
+  let activity1;
+  let activity2;
   let userRepository;
+  let userData;
+  let sleepData;
+  let activityData;
+  let hydrationData;
+
   beforeEach(() => {
     user1 = new User({
       'id': 1,
@@ -34,8 +43,8 @@ describe('Activity', function() {
         24,
         19
       ]
-    })
-    userRepository = new UserRepository();
+    });
+    userRepository = new UserRepository(userData, sleepData, activityData, hydrationData);
     userRepository.users.push(user1, user2);
     activity1 = new Activity({
       "userID": 1,
