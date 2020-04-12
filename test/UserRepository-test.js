@@ -4,12 +4,78 @@ import UserRepository from '../src/UserRepository';
 import User from '../src/User';
 import Sleep from '../src/Sleep';
 
+
 describe('UserRepository', function() {
   let user1;
   let user2;
   let user3;
   let userRepository;
+  let sleep1;
+  let sleep2;
+  let sleep3;
+  let userData;
+  let sleepData;
+  let activityData;
+  let hydrationData;
+
   beforeEach(() => {
+    sleepData = [
+      {
+        "userID": 1,
+        "date": "2019/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "hoursSlept": 7,
+        "sleepQuality": 4.7
+      },
+      {
+        "userID": 3,
+        "date": "2019/06/15",
+        "hoursSlept": 10.8,
+        "sleepQuality": 4.7
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/16",
+        "hoursSlept": 8.1,
+        "sleepQuality": 4.2
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/16",
+        "hoursSlept": 5,
+        "sleepQuality": 3.7
+      },
+      {
+        "userID": 3,
+        "date": "2019/06/16",
+        "hoursSlept": 7,
+        "sleepQuality": 4.2
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/17",
+        "hoursSlept": 7.1,
+        "sleepQuality": 2.8
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/17",
+        "hoursSlept": 6,
+        "sleepQuality": 5.7
+      },
+      {
+        "userID": 3,
+        "date": "2019/06/17",
+        "hoursSlept": 9.8,
+        "sleepQuality": 3.7
+      },
+    ]
+
     user1 = new User({
       'id': 1,
       'name': 'Luisa Hane',
@@ -51,7 +117,7 @@ describe('UserRepository', function() {
         33
       ]
     })
-    userRepository = new UserRepository();
+    userRepository = new UserRepository(userData, sleepData, activityData, hydrationData);
     userRepository.users.push(user1, user2, user3);
   })
   it('should be a function', function() {
