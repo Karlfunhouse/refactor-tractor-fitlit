@@ -1,5 +1,11 @@
-
 $primary-background: #1F1F1F;
+$steps-color: #F5634B;
+$hydration-color: #54C6BE;
+$stairs-color: #8975B2;
+$sleep-color: #FBD089;
+$yellow-text: #F8BA00;
+$red-text: red;
+$green-text: green;
 
 @mixin flex-container($justify-content) {
   display: flex;
@@ -27,4 +33,84 @@ $primary-background: #1F1F1F;
   background-color: $background-color;
   grid-area: $grid-area;
   margin: 0.5vw;
+}
+
+@mixin dropdown-menus ($margin-left, $margin-right, $position) {
+  background-color: $primary-background;
+  color: white;
+  margin-top: -1.2%;
+  margin-left: $margin-left;
+  margin-right: $margin-right;
+  position: $position;
+  text-align: center;
+  z-index: 100;
+}
+
+@mixin paragraph-text ($font-size) {
+  font-size: $font-size;
+  font-weight: 300;
+  padding-bottom: 1vw;
+  padding-top: 0;
+  text-align: center;
+  width: 100%;
+}
+
+@mixin main-card-styling ($height) {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: $height;
+  justify-content: center;
+}
+
+@mixin button-styling-desktop ($margin-left, $margin-right) {
+  background-position: center;
+  background-size: 3.4vw;
+  border: none;
+  height: 3.4vw;
+  margin-left: $margin-left;
+  margin-right: $margin-right;
+  width: 3.4vw;
+}
+
+@mixin button-styling-tablet-phone ($margin-left, $margin-right) {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  height: 8vw;
+  margin-left: $margin-left;
+  margin-right: $margin-right;
+  width: 8vw;
+}
+
+@mixin desktop-main {
+  display: grid;
+  grid-template-areas: 'steps hydration' 'stairs sleep';
+  height: 100%;
+}
+
+@mixin tablet-phone-main {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin card-headers($font-size) {
+  display: inline;
+  font-family: 'Work Sans', sans-serif;
+  font-size: $font-size;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+@mixin dropdown-header($font-size) {
+  font-size: $font-size;
+  padding-bottom: 1vw;
+  text-align: center;
+}
+
+@mixin trendline-styling($font-size, $width) {
+  font-size: $font-size;
+  text-align: center;
+  width: $width;
 }
