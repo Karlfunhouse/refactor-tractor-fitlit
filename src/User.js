@@ -206,6 +206,6 @@
 
     }
   };
-}
+
 
 export default User;

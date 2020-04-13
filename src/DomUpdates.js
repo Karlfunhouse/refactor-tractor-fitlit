@@ -93,7 +93,8 @@ displayHydrationData(user, todayDate, userRepository, hydrationData) {
   $('#hydration-info-glasses-today').text(hydrationData.find(hydration => {
     return hydration.userID === user.id && hydration.date === todayDate
   }).numOunces / 8);
-  // $('')
+  this.displayDailyOzs(user);
+  // this.sortedHydrationDataByDate(user)
 },
 
 displaySleepData(user, todayDate, userRepository, sleepData) {
@@ -124,7 +125,38 @@ displayDropdownInfo(user) {
   $('#header-name').text(`${user.getFirstName()}'S `);
 },
 
+sortedHydrationDataByDate(user) {
+  console.log('ouncesRecord', user.ouncesRecord.slice(1, 7));
 
+  //   user.ouncesRecord.sort((a, b) => {
+  // if (Object.keys(a)[0] > Object.keys(b)[0]) {
+  //   return -1;
+  // }
+  // if (Object.keys(a)[0] < Object.keys(b)[0]) {
+  //   return 1;
+  // }
+  // return 0;
+  // })
+},
+
+displayDailyOzs(user) {
+  let weeklyOzs = user.ouncesRecord.slice(1, 7)
+  let weekData = [];
+  let week = weeklyOzs.forEach(day => {
+    weekData.push(Object.values(day))
+  })
+  // weekData.flat().forEach(value => {
+  // $('.daily-oz').html(`<h4 class='hydration-weekly-amount'><span class='daily-oz' id='hydration-calendar-ounces-1day'></span>${value}</h4>`)
+
+let maybe = weekData.flat().reduce((acc, value) => {
+  // console.log(weekData[value]);
+  acc += `<h4 class='hydration-weekly-amount'><span class='daily-oz' id='hydration-calendar-ounces-1day'></span>${value}</h4>`
+  console.log(acc);
+  return acc
+}, [])
+
+  $('.daily-oz').each(maybe, )
+},
 
 }
 
