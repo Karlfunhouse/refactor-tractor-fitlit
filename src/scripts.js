@@ -283,6 +283,30 @@ let displayFriendsTotalSteps = (user, todayDate) => {
   });
 };
 
+
+// STEPS TO MOVE ALL DOM INVOCATIONS TO CLASSES:
+// 1. Each data-updating method should be invoked
+// in the promise.
+// 2. Event handlers for DOM elements need to be
+// broken down into individual methods, only updating
+// the DOM element that corresponds to the piece of
+// data being manipulated.
+// 3. DOM-updating methods will be called within the
+// user class, on the data method that it corresponds to.
+
+/// OR:
+// 1. Have ONE function that is called in the promise
+// that starts the application (startApplication())-
+// takes in all of the data as parameters, and in
+// the scripts.js outside the promise is where the
+// definition of startApplication() lives.
+// 2. Inside startApplication(), all of our class methods
+// are invoked.
+// 3. Each method inside the user class calculates the
+// necessary data, and then returns the result and that
+// result is passed into the invocation of the DOM-
+// updating method.
+
 let displayUserInfo = (user, todayDate) => {
   displayDropdownInfo(user);
   displayStepsData(user, todayDate);
@@ -406,12 +430,12 @@ function displaySleepData(user, todayDate) {
           // [X] displayStepData()
           // [X] displayHydrationData()
           // [X] displaySleepData()
-  // [ ] SCSS
-      // [ ] base.scss (holds all imports & variables)
-      // [ ] styles.scss (holds all styling using variables)
+  // [X] SCSS
+      // [X] base.scss (holds all imports & variables)
+      // [X] styles.scss (holds all styling using variables)
   // [ ] Testing with SPIES
       // [X] Lesson on SPIES
-      // [ ] Get initial tests passing
+      // [X] Get initial tests passing
       // [ ] Refactor DOM manipulation into methods on an object
       // [ ] Spy on all DOM manipulation methods to verify that they
       // [ ] occurred and were called with the correct arguments
@@ -421,11 +445,11 @@ function displaySleepData(user, todayDate) {
       // [X] Mobile
       // [X] Tablets
       // [X] Desk monitors
-      // [ ] Remove common properties from rules at each breakpoint
-  // [ ] Accessibility
-      // [ ] Tab through app and use it with a mouse
-      // [ ] Must be viewable through color-blind extension
-      // [ ] Use Accessibility Audit to get close to a score of 100%
+      // [X] Remove common properties from rules at each breakpoint
+  // [X] Accessibility
+      // [X] Tab through app and use it with a mouse
+      // [X] Must be viewable through color-blind extension
+      // [X] Use Accessibility Audit to get close to a score of 100%
 
 // THINGS TO ADDRESS
 
