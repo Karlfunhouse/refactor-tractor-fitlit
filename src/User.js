@@ -1,4 +1,4 @@
-// User should take in a parameter for the user data 
+// User should take in a parameter for the user data
 
  class User {
   constructor(userData) {
@@ -200,6 +200,12 @@
     });
     this.friendsActivityRecords = this.friendsActivityRecords.sort((a, b) => b.totalWeeklySteps - a.totalWeeklySteps);
   }
+
+  sortedHydrationDataByDate(date) {
+    console.log(this.ouncesRecord)
+
+    }
+  };
 }
 
 export default User;
