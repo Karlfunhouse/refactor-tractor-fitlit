@@ -53,7 +53,7 @@ button:active {
 
 .dropdown-sleep {
   @extend .data-inputs;
-  background-color: #FBD089;
+  background-color: $sleep-color;
   border-color: red 2px solid;
   display: flex;
   align-items: center;
@@ -69,14 +69,14 @@ button:active {
 
 .dropdown-activity {
   @extend .data-inputs;
-  background-color: #F5634B;
+  background-color: $steps-color;
   display: flex;
   align-items: center;
 }
 
 .dropdown-hydration {
   @extend .data-inputs;
-  background-color: #54C6BE;
+  background-color: $hydration-color;
   display: flex;
   align-items: center;
 }
@@ -145,20 +145,20 @@ h4 {
 }
 
 #steps-card-container {
-  @include card-container(#F5634B, steps);
+  @include card-container($steps-color, steps);
 }
 
 #hydration-card-container {
-  @include card-container(#54C6BE, hydration);
+  @include card-container($hydration-color, hydration);
 }
 
 #stairs-card-container {
-  @include card-container(#8975B2, stairs);
+  @include card-container($stairs-color, stairs);
 
 }
 
 #sleep-card-container {
-  @include card-container(#FBD089, sleep);
+  @include card-container($sleep-color, sleep);
 }
 
 .hydration-data-line {
@@ -240,23 +240,21 @@ h4 {
 // CHANGING CLASSES
 
 .green-text {
-  color: green;
+  color: $green-text;
 }
 
 .red-text {
-  color: red;
+  color: $red-text;
 }
 
 .yellow-text {
-  color: #F8BA00;
+  color: $yellow-text;
 }
 /* MEDIA QUERIES */
 @media screen and (min-width: 769px) {
   // RULES FOR DESKTOP SCREENS
   main {
-    display: grid;
-    grid-template-areas: 'steps hydration' 'stairs sleep';
-    height: 100%;
+    @include desktop-main;
   }
 
   h2 {
@@ -265,47 +263,24 @@ h4 {
   }
 
   h3 {
-    display: inline;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 3vw;
-    font-weight: 700;
-    letter-spacing: 0.2em;
+    @include card-headers(3vw);
   }
 
   h5 {
-    font-size: 1.8vw;
-    padding-bottom: 1vw;
-    text-align: center;
+    @include dropdown-header(1.8vw);
   }
 
   #user-info-dropdown {
-    background-color: #1F1F1F;
-    color: white;
-    margin-left: 60%;
-    margin-top: -1.2%;
-    position: relative;
-    text-align: center;
-    z-index: 100;
+    @include dropdown-menus(60%, 0, relative);
   }
 
   #add-data-dropdown {
-    background-color: #1F1F1F;
-    color: white;
-    margin-right: 60%;
-    margin-top: -1.2%;
-    text-align: center;
-    position: absolute;
-    width: 40%;
-    z-index: 200;
+    @include dropdown-menus(0, 60%, absolute);
+    width: 30%;
   }
 
   .dropdown-p {
-    font-size: 1.2vw;
-    font-weight: 300;
-    padding-bottom: 1vw;
-    padding-top: 0;
-    text-align: center;
-    width: 100%;
+    @include paragraph-text(1.2vw);
   }
 
   .user-data-p {
@@ -313,11 +288,7 @@ h4 {
   }
 
   .main-card {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 20vw;
-    justify-content: center;
+    @include main-card-styling(20vw);
   }
 
   .hydration-weekly-label {
@@ -330,58 +301,31 @@ h4 {
   }
 
   .trend-line {
-    font-size: 2vw;
-    text-align: center;
-    width: 20vw;
+    @include trendline-styling(2vw, 20vw);
   }
 
   .info-button {
-    background-position: center;
-    background-size: 3.4vw;
-    border: none;
+    @include button-styling-desktop(1vw, 0);
     display: inline;
-    height: 3.4vw;
-    margin-left: 1vw;
-    width: 3.4vw;
   }
 
   .friends-button {
-    background-position: center;
-    background-size: 3.4vw;
-    border: none;
+    @include button-styling-desktop(0, 1vw);
     display: inline;
-    height: 3.4vw;
-    margin-right: 1vw;
-    width: 3.4vw;
   }
 
   .calendar-button {
-    background-position: center;
-    background-size: 3.4vw;
-    border: none;
+    @include button-styling-desktop(0, 1vw);
     display: inline;
     float: right;
-    height: 3.4vw;
-    margin-right: 1vw;
-    width: 3.4vw;
   }
 
   .trending-button {
-    background-position: center;
-    background-size: 3.4vw;
-    border: none;
-    height: 3.4vw;
-    margin-left: 1vw;
-    width: 3.4vw;
+    @include button-styling-desktop(1vw, 0);
   }
 
   .go-back-button {
-    background-position: center;
-    background-size: 3.4vw;
-    border: none;
-    height: 3.4vw;
-    margin-left: 1vw;
-    width: 3.4vw;
+    @include button-styling-desktop(1vw, 0);
   }
   .hide {
     display: none;
@@ -390,8 +334,7 @@ h4 {
 @media screen and (max-width: 768px) {
   // RULES FOR TABLET SCREENS
   main {
-    display: flex;
-    flex-direction: column;
+    @include tablet-phone-main;
   }
 
   h2 {
@@ -400,36 +343,24 @@ h4 {
   }
 
   h3 {
-    display: inline;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 5vw;
-    font-weight: 700;
-    letter-spacing: 0.2em;
+    @include card-headers(5vw);
   }
 
   h5 {
-    font-size: 4vw;
-    padding-bottom: 1vw;
-    text-align: center;
+    @include dropdown-header(4vw);
   }
 
   .dropdown-p {
-    font-size: 3.5vw;
-    font-weight: 300;
-    padding-bottom: 1vw;
-    padding-top: 0;
-    text-align: center;
-    width: 100%;
+    @include paragraph-text(3.5vw);
   }
 
   #user-info-dropdown {
-    background-color: #1F1F1F;
-    color: white;
-    margin-left: 40%;
-    margin-top: -1.2%;
-    position: relative;
-    text-align: center;
-    z-index: 100;
+    @include dropdown-menus(40%, 0, relative);
+  }
+
+  #add-data-dropdown {
+    @include dropdown-menus(0, 60%, absolute);
+    width: 80%;
   }
 
   .user-data-p {
@@ -437,12 +368,8 @@ h4 {
   }
 
   .main-card {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 35vw;
+    @include main-card-styling(35vw);
     width: 100%;
-    justify-content: center;
   }
 
   .hydration-weekly-label {
@@ -454,63 +381,30 @@ h4 {
   }
 
   .trend-line {
-    font-size: 5vw;
-    text-align: center;
-    width: 55vw;
+    @include trendline-styling(5vw, 55vw);
   }
 
   .info-button {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
+    @include button-styling-tablet-phone(1vw, 0);
     display: inline;
-    height: 8vw;
-    margin-left: 1vw;
-    width: 8vw;
   }
 
   .friends-button {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
+    @include button-styling-tablet-phone(0, 1vw);
     display: inline;
-    height: 8vw;
-    margin-right: 1vw;
-    width: 8vw;
   }
 
   .calendar-button {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
+    @include button-styling-tablet-phone(0, 1vw);
     display: inline;
-    float: right;
-    height: 8vw;
-    margin-right: 1vw;
-    width: 8vw;
   }
 
   .trending-button {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-    height: 8vw;
-    margin-left: 1vw;
-    width: 8vw;
+    @include button-styling-tablet-phone(1vw, 0);
   }
 
   .go-back-button {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-    height: 8vw;
-    margin-left: 1vw;
-    width: 8vw;
+    @include button-styling-tablet-phone(1vw, 0);
   }
   .hide {
     display: none;
@@ -519,12 +413,8 @@ h4 {
 @media screen and (max-width: 414px) {
   // RULES FOR PHONE SCREENS
   .main-card {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 45vw;
+    @include main-card-styling(45vw);
     width: 100%;
-    justify-content: center;
   }
   .hide {
     display: none;
