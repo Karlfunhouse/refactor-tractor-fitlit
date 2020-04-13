@@ -242,26 +242,143 @@ function sleepButtonHandler() {
   }
 };
 
-//   function sortedHydrationDataByDate(user) { user.ouncesRecord.sort((a, b) => {
-//     if (Object.keys(a)[0] > Object.keys(b)[0]) {
-//       return -1;
-//     }
-//     if (Object.keys(a)[0] < Object.keys(b)[0]) {
-//       return 1;
-//     }
-//     return 0;
-//   })
-// };
-//
-//   let weeklyHydrationDataArray = sortedHydrationDataByDate(user).splice(0, 7);
-//   console.log('weekly', weeklyHydrationDataArray);
-//   console.log('sorted', sortedHydrationDataByDate.splice(0, 7));
-//   //Refactor this into a forEach
-//   for (var i = 0; i < $('.daily-oz').length; i++) {
-//     $('.daily-oz')[i].text(user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0]))
-//   };
-  // splice sortedHydrationDataByDate to get most recent 7 entires
-  // loop through the first 7 entries and populate the oz per day
+let updateTrendingStairsDays = (user) => {
+  user.findTrendingStairsDays();
+  $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
+};
+
+let updateTrendingStepDays = (user) => {
+  user.findTrendingStepDays();
+  $('.trending-steps-phrase-container').html(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
+};
+
+let displayFriendsTotalSteps = (user, todayDate) => {
+  user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
+  user.friendsActivityRecords.forEach(friend => {
+    $('#dropdown-friends-steps-container').append(`
+    <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
+    `);
+  });
+};
+
+
+// STEPS TO MOVE ALL DOM INVOCATIONS TO CLASSES:
+// 1. Each data-updating method should be invoked
+// in the promise.
+// 2. Event handlers for DOM elements need to be
+// broken down into individual methods, only updating
+// the DOM element that corresponds to the piece of
+// data being manipulated.
+// 3. DOM-updating methods will be called within the
+// user class, on the data method that it corresponds to.
+
+/// OR:
+// 1. Have ONE function that is called in the promise
+// that starts the application (startApplication())-
+// takes in all of the data as parameters, and in
+// the scripts.js outside the promise is where the
+// definition of startApplication() lives.
+// 2. Inside startApplication(), all of our class methods
+// are invoked.
+// 3. Each method inside the user class calculates the
+// necessary data, and then returns the result and that
+// result is passed into the invocation of the DOM-
+// updating method.
+
+let displayUserInfo = (user, todayDate) => {
+  displayDropdownInfo(user);
+  displayStepsData(user, todayDate);
+  displayStairsData(user, todayDate);
+  displayHydrationData(user, todayDate);
+  displaySleepData(user, todayDate);
+};
+
+function displayDropdownInfo(user) {
+  $('#dropdown-goal').text(`DAILY STEP GOAL | ${user.dailyStepGoal}`);
+  $('#dropdown-email').text(`EMAIL | ${user.email}`);
+  $('#dropdown-name').text(user.name.toUpperCase());
+  $('#header-name').text(`${user.getFirstName()}'S `);
+};
+
+function displayStepsData(user, todayDate) {
+  $('#steps-info-miles-walked-today').text(user.activityRecord.find(activity => {
+    return (activity.date === todayDate && activity.userId === user.id)
+  }).calculateMiles(userRepository));
+  $('#steps-calendar-total-active-minutes-weekly').text(user.calculateAverageMinutesActiveThisWeek(todayDate));
+  $('#steps-calendar-total-steps-weekly').text(user.calculateAverageStepsThisWeek(todayDate))
+  $('#steps-friend-active-minutes-average-today').text(userRepository.calculateAverageMinutesActive(todayDate));
+  $('#steps-friend-average-step-goal').text(`${userRepository.calculateAverageStepGoal()}`);
+  $('#steps-friend-steps-average-today').text(userRepository.calculateAverageSteps(todayDate));
+  $('#steps-info-active-minutes-today').text(activityData.find(activity => {
+    return activity.userID === user.id && activity.date === todayDate
+  }).minutesActive);
+  $('#steps-user-steps-today').text(activityData.find(activity => {
+    return activity.userID === user.id && activity.date === todayDate
+  }).numSteps);
+};
+
+function displayStairsData(user, todayDate) {
+  $('#stairs-calendar-flights-average-weekly').text(user.calculateAverageFlightsThisWeek(todayDate));
+  $('#stairs-calendar-stairs-average-weekly').text((user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0));
+  $('#stairs-friend-flights-average-today').text((userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1));
+  $('#stairs-info-flights-today').text(activityData.find(activity => {
+    return activity.userID === user.id && activity.date === todayDate
+  }).flightsOfStairs);
+  $('#stairs-user-stairs-today').text(activityData.find(activity => {
+    return activity.userID === user.id && activity.date === todayDate
+  }).flightsOfStairs * 12);
+};
+
+function displayHydrationData(user, todayDate) {
+  $('#hydration-user-ounces-today').text(hydrationData.find(hydration => {
+    return hydration.userID === user.id && hydration.date === todayDate
+  }).numOunces);
+  $('#hydration-friend-ounces-today').text(userRepository.calculateAverageDailyWater(todayDate));
+  $('#hydration-info-glasses-today').text(hydrationData.find(hydration => {
+    return hydration.userID === user.id && hydration.date === todayDate
+  }).numOunces / 8);
+};
+
+function displaySleepData(user, todayDate) {
+  $('.user-id-js').text(`${user.id}`)
+  $('#sleep-calendar-hours-average-weekly').text(user.calculateAverageHoursThisWeek(todayDate));
+  $('#sleep-calendar-quality-average-weekly').text(user.calculateAverageQualityThisWeek(todayDate));
+  $('#sleep-friend-longest-sleeper').text(userRepository.users.find(user => {
+    return user.id === userRepository.getLongestSleepers(todayDate)
+  }).getFirstName());
+  $('#sleep-friend-worst-sleeper').text(userRepository.users.find(user => {
+    return user.id === userRepository.getWorstSleepers(todayDate)
+  }).getFirstName());
+  $('#sleep-info-hours-average-alltime').text(user.hoursSleptAverage);
+  $('#sleep-info-quality-average-alltime').text(user.sleepQualityAverage);
+  $('#sleep-info-quality-today').text(sleepData.find(sleep => {
+    return sleep.userID === user.id && sleep.date === todayDate
+  }).sleepQuality);
+  $('#sleep-user-hours-today').text(sleepData.find(sleep => {
+    return sleep.userID === user.id && sleep.date === todayDate
+  }).hoursSlept);
+};
+
+
+  // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
+  //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
+  //     return -1;
+  //   }
+  //   if (Object.keys(a)[0] < Object.keys(b)[0]) {
+  //     return 1;
+  //   }
+  //   return 0;
+  // });
+  //
+  // let weeklyHydrationDataArray = sortedHydrationDataByDate.splice(0, 7);
+  // console.log('weekly', weeklyHydrationDataArray);
+  // console.log('sorted', sortedHydrationDataByDate.splice(0, 7));
+  // //Refactor this into a forEach
+  // for (var i = 0; i < $('.daily-oz').length; i++) {
+  //   $('.daily-oz')[i].text(user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0]))
+  // };
+  //splice sortedHydrationDataByDate to get most recent 7 entires
+  //loop through the first 7 entries and populate the oz per day
 // }
 
 
@@ -291,9 +408,9 @@ function sleepButtonHandler() {
           // [X] displayStepData()
           // [X] displayHydrationData()
           // [X] displaySleepData()
-  // [ ] SCSS
-      // [ ] base.scss (holds all imports & variables)
-      // [ ] styles.scss (holds all styling using variables)
+  // [X] SCSS
+      // [X] base.scss (holds all imports & variables)
+      // [X] styles.scss (holds all styling using variables)
   // [ ] Testing with SPIES
       // [X] Lesson on SPIES
       // [X] Get initial tests passing
@@ -306,11 +423,11 @@ function sleepButtonHandler() {
       // [X] Mobile
       // [X] Tablets
       // [X] Desk monitors
-      // [ ] Remove common properties from rules at each breakpoint
-  // [ ] Accessibility
-      // [ ] Tab through app and use it with a mouse
-      // [ ] Must be viewable through color-blind extension
-      // [ ] Use Accessibility Audit to get close to a score of 100%
+      // [X] Remove common properties from rules at each breakpoint
+  // [X] Accessibility
+      // [X] Tab through app and use it with a mouse
+      // [X] Must be viewable through color-blind extension
+      // [X] Use Accessibility Audit to get close to a score of 100%
 
 // THINGS TO ADDRESS
 
