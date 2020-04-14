@@ -63,7 +63,8 @@ Promise.all([userData, sleepData, activityData, hydrationData])
     domUpdates.displayFriendsTotalSteps(user, todayDate, userRepository);
     domUpdates.displayUserInfo(user, todayDate, userRepository, activityData, hydrationData, sleepData);
     // sortedHydrationDataByDate;
-    domUpdates.loadUserData()
+    domUpdates.loadUserData();
+    // startApplication(user, todayDate);
   })
   .catch(error => {
     console.log('Something is amiss with promise all', error)
@@ -95,6 +96,24 @@ let instantiateAllUsersSleep = () => {
   })
 };
 
+
+function startApplication(user, userRepository, todayDate) {
+  user.calculateAverageMinutesActiveThisWeek(todayDate);
+  user.calculateAverageStepsThisWeek(todayDate);
+  userRepository.calculateAverageMinutesActive(todayDate);
+  userRepository.calculateAverageStepGoal();
+  userRepository.calculateAverageSteps(todayDate);
+  user.calculateAverageFlightsThisWeek(todayDate);
+  (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+  (user.calculateAverageStairs(todayDate) / 12).toFixed(1);
+  userRepository.calculateAverageDailyWater(todayDate);
+  user.calculateAverageHoursThisWeek(todayDate);
+  user.calculateAverageQualityThisWeek(todayDate);
+  
+
+
+
+}
 
 // EVENTS
 $('#steps-card-container').on('click', (event) => stepsButtonHandler());
