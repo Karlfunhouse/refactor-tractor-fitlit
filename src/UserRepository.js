@@ -1,6 +1,5 @@
-// import sleepData from './data/sleep';
-const domUpdates = require('../src/DomUpdates.js')
-// Pass in all data upon instantiation.
+import domUpdates from './DomUpdates'
+
 class UserRepository {
   constructor(userData, sleepData, activityData, hydrationData) {
     this.users = [];
@@ -9,13 +8,28 @@ class UserRepository {
     this.activityData = activityData;
     this.hydrationData = hydrationData;
   }
-  // This is not being called anywhere
-  // Could be used for finding friends.
+
   getUser(id) {
     return this.users.find(function(user) {
       return user.id === id;
     })
   }
+
+  calculateAverageActivityData(todayDate) {
+    this.calculateAverageStepGoal();
+    this.calculateAverageSteps(todayDate);
+    this.calculateAverageStairs(todayDate);
+    this.calculateAverageMinutesActive(todayDate);
+  }
+
+  calculateAverageHydrationData(todayDate) {
+    this.calculateAverageDailyWater(todayDate);
+  }
+
+  // calculateAverageSleepData(user, todayDate) {
+  //   this.findWorstSleeper(user, todayDate);
+  // }
+  //Check
   calculateAverageStepGoal() {
     let goals = this.users.map(function(user) {
       return user.dailyStepGoal;
@@ -24,7 +38,8 @@ class UserRepository {
       sum += goal;
       return sum;
     }, 0);
-    return total / this.users.length;
+    let averageStepsGoal = total / this.users.length;
+    domUpdates.displayAllAverageStepGoal(averageStepsGoal)
   }
   calculateAverageSleepQuality() {
     let totalSleepQuality = this.users.reduce((sum, user) => {
@@ -33,6 +48,7 @@ class UserRepository {
     }, 0);
     return totalSleepQuality / this.users.length;
   }
+  //Check
   calculateAverageSteps(date) {
     let allUsersStepsCount = this.users.map(user => {
       return user.activityRecord.filter(activity => {
@@ -45,8 +61,10 @@ class UserRepository {
       })
       return stepsSum;
     }, 0);
-    return Math.round(sumOfSteps / allUsersStepsCount.length);
+    let averageSteps = Math.round(sumOfSteps / allUsersStepsCount.length);
+    domUpdates.displayAllAverageStepsToday(averageSteps);
   }
+  //Check
   calculateAverageStairs(date) {
     let allUsersStairsCount = this.users.map(user => {
       return user.activityRecord.filter(activity => {
@@ -59,8 +77,11 @@ class UserRepository {
       })
       return stairsSum;
     }, 0);
-    return Math.round(sumOfStairs / allUsersStairsCount.length);
+    let averageStairs = Math.round(sumOfStairs / allUsersStairsCount.length);
+    domUpdates.displayAllAverageFlightsToday((averageStairs / 12).toFixed(1));
+
   }
+  //Check
   calculateAverageMinutesActive(date) {
     let allUsersMinutesActiveCount = this.users.map(user => {
       return user.activityRecord.filter(activity => {
@@ -73,8 +94,10 @@ class UserRepository {
       })
       return minutesActiveSum;
     }, 0);
-    return Math.round(sumOfMinutesActive / allUsersMinutesActiveCount.length);
+    let minutesActive = Math.round(sumOfMinutesActive / allUsersMinutesActiveCount.length);
+    domUpdates.displayAllActiveMinutesToday(minutesActive);
   }
+  //Check
   calculateAverageDailyWater(date) {
     let todaysDrinkers = this.users.filter(user => {
       return user.addDailyOunces(date) > 0;
@@ -82,7 +105,8 @@ class UserRepository {
     let sumDrankOnDate = todaysDrinkers.reduce((sum, drinker) => {
       return sum += drinker.addDailyOunces(date);
     }, 0)
-    return Math.floor(sumDrankOnDate / todaysDrinkers.length);
+    let averageDailyWater = Math.floor(sumDrankOnDate / todaysDrinkers.length);
+    domUpdates.displayAllAverageOuncesToday(averageDailyWater);
   }
   findBestSleepers(date) {
     return this.users.filter(user => {
@@ -103,6 +127,12 @@ class UserRepository {
       return a.hoursSlept - b.hoursSlept;
     })[0].userID;
   }
+  // findWorstSleeper(user, todayDate) {
+  //   let worstSleeper = this.users.find(user => {
+  //     return user.id === this.getWorstSleepers(todayDate)
+  //   })
+  //   domUpdates.displayWorstSleeper(worstSleeper)
+  // }
 }
 
 export default UserRepository;

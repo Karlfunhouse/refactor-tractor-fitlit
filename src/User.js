@@ -1,5 +1,6 @@
-// User should take in a parameter for the user data
 import domUpdates from './DomUpdates'
+
+
  class User {
   constructor(userData) {
     this.id = userData.id;
@@ -27,6 +28,28 @@ import domUpdates from './DomUpdates'
   getFirstName() {
     var names = this.name.split(' ');
     return names[0].toUpperCase();
+  }
+
+  calculateUserSleepData(user, todayDate, sleepData) {
+    this.calculateAverageHoursThisWeek(todayDate);
+    this.calculateAverageQualityThisWeek(todayDate);
+    this.calculateAverageQualityToday(user, todayDate, sleepData);
+    this.calculateAverageHoursSleptToday(user, todayDate, sleepData);
+  }
+
+  calculateUserActivityData(user, todayDate, userRepository, activityData) {
+    this.calculateAverageMinutesActiveThisWeek(todayDate);
+    this.calculateAverageStepsThisWeek(todayDate);
+    this.calculateAverageFlightsThisWeek(todayDate);
+    this.calculateMilesWalkedToday(user, todayDate, userRepository);
+    this.calculateAverageMinutesActiveToday(user, todayDate, activityData);
+    this.calculateAverageStepsToday(user, todayDate, activityData);
+    this.calculateAverageFlightsToday(user, todayDate, activityData);
+    this.calculateAverageStairsToday(user, todayDate, activityData);
+  }
+
+  calculateUserHydrationData(user, todayDate, hydrationData) {
+    this.calculateTotalOuncesToday(user, todayDate, hydrationData);
   }
 
   updateHydration(date, amount) {
@@ -68,25 +91,83 @@ import domUpdates from './DomUpdates'
       this.sleepQualityAverage = quality;
     }
   }
-
+  //Check
   calculateAverageHoursThisWeek(todayDate) {
-    return (this.sleepHoursRecord.reduce((sum, sleepAct) => {
+    let averageHours = (this.sleepHoursRecord.reduce((sum, sleepAct) => {
       let index = this.sleepHoursRecord.indexOf(this.sleepHoursRecord.find(sleep => sleep.date === todayDate));
       if (index <= this.sleepHoursRecord.indexOf(sleepAct) && this.sleepHoursRecord.indexOf(sleepAct) <= (index + 6)) {
         sum += sleepAct.hours;
       }
       return sum;
     }, 0) / 7).toFixed(1);
+    domUpdates.displayAverageHourlySleepThisWeek(averageHours);
   }
-
+  //Check
+  calculateMilesWalkedToday(user, todayDate, userRepository) {
+    let milesWalked = this.activityRecord.find(activity => {
+      return (activity.date === todayDate && activity.userId === user.id)
+    }).calculateMiles(userRepository);
+    domUpdates.displayMilesWalkedToday(milesWalked);
+  }
+  //Check
+  calculateAverageMinutesActiveToday(user, todayDate, activityData) {
+    let minutesActiveToday = activityData.find(activity => {
+      return activity.userID === user.id && activity.date === todayDate
+    }).minutesActive
+    domUpdates.displayAverageMinutesActiveToday(minutesActiveToday);
+  }
+  //Check
+  calculateAverageStepsToday(user, todayDate, activityData) {
+    let averageStepsToday = activityData.find(activity => {
+      return activity.userID === user.id && activity.date === todayDate
+    }).numSteps
+    domUpdates.displayTotalStepsToday(averageStepsToday);
+  }
+  //Check
+  calculateAverageFlightsToday(user, todayDate, activityData) {
+    let averageFlightsToday = activityData.find(activity => {
+      return activity.userID === user.id && activity.date === todayDate
+    }).flightsOfStairs
+    domUpdates.displayTotalFlightsToday(averageFlightsToday);
+  }
+  //Check
+  calculateAverageStairsToday(user, todayDate, activityData) {
+    let averageStairsToday = activityData.find(activity => {
+      return activity.userID === user.id && activity.date === todayDate
+    }).flightsOfStairs * 12;
+    domUpdates.displayTotalStairsToday(averageStairsToday);
+  }
+  //Check
+  calculateTotalOuncesToday(user, todayDate, hydrationData) {
+    let averageOuncesToday = hydrationData.find(hydration => {
+      return hydration.userID === user.id && hydration.date === todayDate
+    }).numOunces;
+    domUpdates.displayTotalOuncesToday(averageOuncesToday);
+  }
+  //Check
+  calculateAverageQualityToday(user, todayDate, sleepData) {
+    let averageQualityToday = sleepData.find(sleep => {
+      return sleep.userID === user.id && sleep.date === todayDate
+    }).sleepQuality;
+    domUpdates.displaySleepQualityToday(averageQualityToday);
+  }
+  //Check
+  calculateAverageHoursSleptToday(user, todayDate, sleepData) {
+    let hoursSlept = sleepData.find(sleep => {
+      return sleep.userID === user.id && sleep.date === todayDate
+    }).hoursSlept;
+    domUpdates.displayHoursSleepToday(hoursSlept);
+  }
+  //Check
   calculateAverageQualityThisWeek(todayDate) {
-    return (this.sleepQualityRecord.reduce((sum, sleepAct) => {
+    let averageQuality = (this.sleepQualityRecord.reduce((sum, sleepAct) => {
       let index = this.sleepQualityRecord.indexOf(this.sleepQualityRecord.find(sleep => sleep.date === todayDate));
       if (index <= this.sleepQualityRecord.indexOf(sleepAct) && this.sleepQualityRecord.indexOf(sleepAct) <= (index + 6)) {
         sum += sleepAct.quality;
       }
       return sum;
     }, 0) / 7).toFixed(1);
+    domUpdates.displayAverageSleepQualityThisWeek(averageQuality);
   }
 
   updateActivities(activity) {
@@ -110,7 +191,7 @@ import domUpdates from './DomUpdates'
     }, 0);
     return Math.round(totalMinutes * 7.6);
   }
-
+  //Check
   calculateAverageMinutesActiveThisWeek(todayDate) {
     let minutesActive = (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
@@ -122,25 +203,28 @@ import domUpdates from './DomUpdates'
     console.log('hi', minutesActive)
     domUpdates.displayAverageMinutesActiveThisWeek(minutesActive);
   }
-
+  //Check
   calculateAverageStepsThisWeek(todayDate) {
-    return (this.activityRecord.reduce((sum, activity) => {
+    let averageSteps = (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
       if (index <= this.activityRecord.indexOf(activity) && this.activityRecord.indexOf(activity) <= (index + 6)) {
         sum += activity.steps;
       }
       return sum;
     }, 0) / 7).toFixed(0);
+    domUpdates.displayTotalStepsThisWeek(averageSteps);
   }
-
+  //Check
   calculateAverageFlightsThisWeek(todayDate) {
-    return (this.activityRecord.reduce((sum, activity) => {
+    let averageFlightsThisWeek = (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
       if (index <= this.activityRecord.indexOf(activity) && this.activityRecord.indexOf(activity) <= (index + 6)) {
         sum += activity.flightsOfStairs;
       }
       return sum;
     }, 0) / 7).toFixed(1);
+    domUpdates.displayAverageFlightsThisWeek(averageFlightsThisWeek);
+    domUpdates.displayAverageStairsThisWeek((averageFlightsThisWeek * 12).toFixed(0));
   }
 
   findTrendingStepDays() {
