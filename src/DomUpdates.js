@@ -58,15 +58,19 @@ displayUserInfo(user, todayDate, userRepository, activityData, hydrationData, sl
 
 },
 
+displayAverageMinutesActiveThisWeek(allMinutes) {
+  $('#steps-calendar-total-active-minutes-weekly').text(allMinutes)
+},
+
 displayStepsData(user, todayDate, userRepository, activityData) {
   //displayMilkesWalkedToday()
-  //** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#steps-info-miles-walked-today').text(user.activityRecord.find(activity => {
     return (activity.date === todayDate && activity.userId === user.id)
   }).calculateMiles(userRepository));
 
   //displayAverageMinutesActiveThisWeek()
-  $('#steps-calendar-total-active-minutes-weekly').text(user.calculateAverageMinutesActiveThisWeek(todayDate));
+  // $('#steps-calendar-total-active-minutes-weekly').text(user.calculateAverageMinutesActiveThisWeek(todayDate));
 
   //displayTotalStepsThisWeek()
   $('#steps-calendar-total-steps-weekly').text(user.calculateAverageStepsThisWeek(todayDate));
@@ -81,13 +85,13 @@ displayStepsData(user, todayDate, userRepository, activityData) {
   $('#steps-friend-steps-average-today').text(userRepository.calculateAverageSteps(todayDate));
 
   //displayAverageMinutesActiveToday()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#steps-info-active-minutes-today').text(activityData.find(activity => {
     return activity.userID === user.id && activity.date === todayDate
   }).minutesActive);
 
   //displayTotalStepsToday()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#steps-user-steps-today').text(activityData.find(activity => {
     return activity.userID === user.id && activity.date === todayDate
   }).numSteps);
@@ -104,13 +108,13 @@ displayStairsData(user, todayDate, userRepository, activityData) {
   $('#stairs-friend-flights-average-today').text((userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1));
 
   //displayTotalFlightsToday()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#stairs-info-flights-today').text(activityData.find(activity => {
     return activity.userID === user.id && activity.date === todayDate
   }).flightsOfStairs);
 
   //displayTotalStairsToday()
-  ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#stairs-user-stairs-today').text(activityData.find(activity => {
     return activity.userID === user.id && activity.date === todayDate
   }).flightsOfStairs * 12);
@@ -118,7 +122,7 @@ displayStairsData(user, todayDate, userRepository, activityData) {
 
 displayHydrationData(user, todayDate, userRepository, hydrationData) {
   //displayTotalOuncesToday()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#hydration-user-ounces-today').text(hydrationData.find(hydration => {
     return hydration.userID === user.id && hydration.date === todayDate
   }).numOunces);
@@ -127,7 +131,7 @@ displayHydrationData(user, todayDate, userRepository, hydrationData) {
   $('#hydration-friend-ounces-today').text(userRepository.calculateAverageDailyWater(todayDate));
 
   //displayTotalGlassesToday()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#hydration-info-glasses-today').text(hydrationData.find(hydration => {
     return hydration.userID === user.id && hydration.date === todayDate
   }).numOunces / 8);
@@ -147,13 +151,13 @@ displaySleepData(user, todayDate, userRepository, sleepData) {
   $('#sleep-calendar-quality-average-weekly').text(user.calculateAverageQualityThisWeek(todayDate));
 
   //displayLongestSleeper()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#sleep-friend-longest-sleeper').text(userRepository.users.find(user => {
     return user.id === userRepository.getLongestSleepers(todayDate)
   }).getFirstName());
 
   //displayWorstSleeper()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#sleep-friend-worst-sleeper').text(userRepository.users.find(user => {
     return user.id === userRepository.getWorstSleepers(todayDate)
   }).getFirstName());
@@ -167,13 +171,13 @@ displaySleepData(user, todayDate, userRepository, sleepData) {
   $('#sleep-info-quality-average-alltime').text(user.sleepQualityAverage);
 
   //displaySleepQualityToday()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#sleep-info-quality-today').text(sleepData.find(sleep => {
     return sleep.userID === user.id && sleep.date === todayDate
   }).sleepQuality);
 
   //displayHoursSleepToday()
-  // ** NOT IN START APPLICATION**
+  // NOT IN START APPLICATION
   $('#sleep-user-hours-today').text(sleepData.find(sleep => {
     return sleep.userID === user.id && sleep.date === todayDate
   }).hoursSlept);

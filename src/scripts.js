@@ -7,7 +7,7 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 import $ from 'jquery';
-import domUpdates from './domUpdates'
+import domUpdates from './DomUpdates'
 
 // GLOBALS
 let userRepository;
@@ -64,7 +64,7 @@ Promise.all([userData, sleepData, activityData, hydrationData])
     domUpdates.displayUserInfo(user, todayDate, userRepository, activityData, hydrationData, sleepData);
     // sortedHydrationDataByDate;
     domUpdates.loadUserData();
-    // startApplication(user, todayDate);
+    startApplication(user, userRepository, todayDate);
   })
   .catch(error => {
     console.log('Something is amiss with promise all', error)
@@ -109,10 +109,6 @@ function startApplication(user, userRepository, todayDate) {
   userRepository.calculateAverageDailyWater(todayDate);
   user.calculateAverageHoursThisWeek(todayDate);
   user.calculateAverageQualityThisWeek(todayDate);
-  
-
-
-
 }
 
 // EVENTS

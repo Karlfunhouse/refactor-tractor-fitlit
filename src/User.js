@@ -1,5 +1,5 @@
 // User should take in a parameter for the user data
-
+import domUpdates from './DomUpdates'
  class User {
   constructor(userData) {
     this.id = userData.id;
@@ -112,13 +112,15 @@
   }
 
   calculateAverageMinutesActiveThisWeek(todayDate) {
-    return (this.activityRecord.reduce((sum, activity) => {
+    let minutesActive = (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
       if (index <= this.activityRecord.indexOf(activity) && this.activityRecord.indexOf(activity) <= (index + 6)) {
         sum += activity.minutesActive;
       }
       return sum;
     }, 0) / 7).toFixed(0);
+    console.log('hi', minutesActive)
+    domUpdates.displayAverageMinutesActiveThisWeek(minutesActive);
   }
 
   calculateAverageStepsThisWeek(todayDate) {

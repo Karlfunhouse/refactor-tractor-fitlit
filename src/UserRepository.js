@@ -1,5 +1,5 @@
 // import sleepData from './data/sleep';
-
+const domUpdates = require('../src/DomUpdates.js')
 // Pass in all data upon instantiation.
 class UserRepository {
   constructor(userData, sleepData, activityData, hydrationData) {
