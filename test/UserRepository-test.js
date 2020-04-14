@@ -29,7 +29,9 @@ describe('UserRepository', function() {
   beforeEach(() => {
     chai.spy.on(domUpdates, "displayAllAverageStepGoal", () => {});
     chai.spy.on(domUpdates, "displayAllAverageFlightsToday", () => {});
-
+    chai.spy.on(domUpdates, "displayAllAverageStepsToday", () => {});
+    chai.spy.on(domUpdates, "displayAllActiveMinutesToday", () => {});
+    chai.spy.on(domUpdates, "displayAllAverageOuncesToday", () => {});
 
       sleepData = [
       {
@@ -174,7 +176,9 @@ describe('UserRepository', function() {
       {"2019/06/15": 1},
       {"2019/06/16": 4}
     ]
-    expect(userRepository.calculateAverageDailyWater("2019/06/16")).to.equal(5)
+    expect(userRepository.calculateAverageDailyWater("2019/06/16")).to.equal(5);
+    expect(domUpdates.displayAllAverageOuncesToday).to.have.been.called(1);
+    expect(domUpdates.displayAllAverageOuncesToday).to.have.been.called.with(5);
   });
   it('should have a method that finds the best sleepers', function() {
     sleep1 = new Sleep({
@@ -246,10 +250,14 @@ describe('UserRepository', function() {
     user1.activityRecord = [{date: "2019/09/17", steps: 100}, {date: "2019/09/17", steps: 2000}];
     user2.activityRecord = [{date: "2019/09/16", steps: 9820}, {date: "2019/09/17", steps: 234}];
     expect(userRepository.calculateAverageSteps("2019/09/17")).to.equal(778);
+    expect(domUpdates.displayAllAverageStepsToday).to.have.been.called(1);
+    expect(domUpdates.displayAllAverageStepsToday).to.have.been.called.with(778);
   })
   it('should have a method that calculates average number of active minutes for users', function() {
     user1.activityRecord = [{date: "2019/09/17", minutesActive: 100}, {date: "2019/09/17", minutesActive: 20}];
     user2.activityRecord = [{date: "2019/09/16", minutesActive: 78}, {date: "2019/09/17", minutesActive: 12}];
     expect(userRepository.calculateAverageMinutesActive("2019/09/17")).to.equal(44);
+    expect(domUpdates.displayAllActiveMinutesToday).to.have.been.called(1);
+    expect(domUpdates.displayAllActiveMinutesToday).to.have.been.called.with(44);
   })
 });
