@@ -1,11 +1,15 @@
-import { expect } from 'chai';
+import $ from 'jquery';
+const chai = require('chai');
+const expect = chai.expect;
+const spies = require("chai-spies");
+chai.use(spies);
 
+import domUpdates from '../src/DomUpdates'
 import UserRepository from '../src/UserRepository';
 import User from '../src/User';
 import Sleep from '../src/Sleep';
-
-
 describe('UserRepository', function() {
+
   let user1;
   let user2;
   let user3;
@@ -18,8 +22,16 @@ describe('UserRepository', function() {
   let activityData;
   let hydrationData;
 
+  afterEach(() => {
+    chai.spy.restore(domUpdates);
+  });
+
   beforeEach(() => {
-    sleepData = [
+    chai.spy.on(domUpdates, "displayAllAverageStepGoal", () => {});
+    chai.spy.on(domUpdates, "displayAllAverageFlightsToday", () => {});
+
+
+      sleepData = [
       {
         "userID": 1,
         "date": "2019/06/15",
@@ -120,6 +132,8 @@ describe('UserRepository', function() {
     userRepository = new UserRepository(userData, sleepData, activityData, hydrationData);
     userRepository.users.push(user1, user2, user3);
   })
+
+
   it('should be a function', function() {
     expect(UserRepository).to.be.a('function');
   });
@@ -135,6 +149,8 @@ describe('UserRepository', function() {
   })
   it('calculateAverageStepGoal should return average step goal for all users', function() {
     expect(userRepository.calculateAverageStepGoal()).to.equal(10000);
+    expect(domUpdates.displayAllAverageStepGoal).to.have.been.called(1)
+    expect(domUpdates.displayAllAverageStepGoal).to.have.been.called.with(10000)
   })
   it('calculateAverageSleepQuality should return average sleep quality for all users', function() {
     user1.sleepQualityAverage = 3.3;
@@ -222,7 +238,9 @@ describe('UserRepository', function() {
   it('should have a method that calculates average number of stairs for users', function() {
     user1.activityRecord = [{date: "2019/09/17", flightsOfStairs: 10}, {date: "2019/09/17", flightsOfStairs: 15}];
     user2.activityRecord = [{date: "2019/09/16", flightsOfStairs: 8}, {date: "2019/09/17", flightsOfStairs: 4}];
-    expect(userRepository.calculateAverageStairs("2019/09/17")).to.equal(10);
+    expect(userRepository.calculateAverageFlights("2019/09/17")).to.equal(10);
+    expect(domUpdates.displayAllAverageFlightsToday).to.have.been.called(1)
+    expect(domUpdates.displayAllAverageFlightsToday).to.have.been.called.with(10)
   })
   it('should have a method that calculates average number of steps for users', function() {
     user1.activityRecord = [{date: "2019/09/17", steps: 100}, {date: "2019/09/17", steps: 2000}];

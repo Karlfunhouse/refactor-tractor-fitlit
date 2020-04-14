@@ -18,7 +18,7 @@ class UserRepository {
   calculateAverageActivityData(todayDate) {
     this.calculateAverageStepGoal();
     this.calculateAverageSteps(todayDate);
-    this.calculateAverageStairs(todayDate);
+    this.calculateAverageFlights(todayDate);
     this.calculateAverageMinutesActive(todayDate);
   }
 
@@ -40,6 +40,7 @@ class UserRepository {
     }, 0);
     let averageStepsGoal = total / this.users.length;
     domUpdates.displayAllAverageStepGoal(averageStepsGoal)
+    return averageStepsGoal
   }
   calculateAverageSleepQuality() {
     let totalSleepQuality = this.users.reduce((sum, user) => {
@@ -63,9 +64,10 @@ class UserRepository {
     }, 0);
     let averageSteps = Math.round(sumOfSteps / allUsersStepsCount.length);
     domUpdates.displayAllAverageStepsToday(averageSteps);
+    return averageSteps
   }
   //Check
-  calculateAverageStairs(date) {
+  calculateAverageFlights(date) {
     let allUsersStairsCount = this.users.map(user => {
       return user.activityRecord.filter(activity => {
         return activity.date === date;
@@ -77,9 +79,9 @@ class UserRepository {
       })
       return stairsSum;
     }, 0);
-    let averageStairs = Math.round(sumOfStairs / allUsersStairsCount.length);
-    domUpdates.displayAllAverageFlightsToday((averageStairs / 12).toFixed(1));
-
+    let averageFlights = Math.round(sumOfStairs / allUsersStairsCount.length);
+    domUpdates.displayAllAverageFlightsToday(averageFlights);
+    return (averageFlights)
   }
   //Check
   calculateAverageMinutesActive(date) {
@@ -96,6 +98,7 @@ class UserRepository {
     }, 0);
     let minutesActive = Math.round(sumOfMinutesActive / allUsersMinutesActiveCount.length);
     domUpdates.displayAllActiveMinutesToday(minutesActive);
+    return minutesActive
   }
   //Check
   calculateAverageDailyWater(date) {
@@ -107,6 +110,7 @@ class UserRepository {
     }, 0)
     let averageDailyWater = Math.floor(sumDrankOnDate / todaysDrinkers.length);
     domUpdates.displayAllAverageOuncesToday(averageDailyWater);
+    return averageDailyWater
   }
   findBestSleepers(date) {
     return this.users.filter(user => {
