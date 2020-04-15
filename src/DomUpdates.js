@@ -1,13 +1,14 @@
+// IMPORTS
 import $ from 'jquery';
 import UserRepository from '../src/UserRepository';
 import User from '../src/User';
 import Sleep from '../src/Sleep';
 import Activity from '../src/Activity';
 import Hydration from '../src/Hydration';
-// let dailyOz = document.querySelectorAll('.daily-oz');
-// let dailyOzArray = Array.from(dailyOz);
+
 let domUpdates = {
 
+// BASIC DOM DISPLAY METHODS
   displayInitialDomData(user, todayDate, userRepository) {
     this.updateTrendingStairsDays(user);
     this.updateTrendingStepDays(user);
@@ -68,16 +69,26 @@ let domUpdates = {
     });
   },
 
+// ACTIVITY METHODS
   displayAverageMinutesActiveThisWeek(allMinutes) {
     $('#steps-calendar-total-active-minutes-weekly').text(allMinutes);
   },
 
-  displayTotalStepsThisWeek(totalSteps) {
-    $('#steps-calendar-total-steps-weekly').text(totalSteps);
-  },
-
   displayAllActiveMinutesToday(minutesActive) {
     $('#steps-friend-active-minutes-average-today').text(minutesActive)
+  },
+
+  displayAverageMinutesActiveToday(averageMinutes) {
+    $('#steps-info-active-minutes-today').text(averageMinutes);
+  },
+
+  displayMilesWalkedToday(milesWalked) {
+    $('#steps-info-miles-walked-today').text(milesWalked);
+  },
+
+// STEPS METHODS
+  displayTotalStepsThisWeek(totalSteps) {
+    $('#steps-calendar-total-steps-weekly').text(totalSteps);
   },
 
   displayAllAverageStepGoal(averageStepsGoal) {
@@ -88,6 +99,11 @@ let domUpdates = {
     $('#steps-friend-steps-average-today').text(averageStepsToday);
   },
 
+  displayTotalStepsToday(totalSteps) {
+    $('#steps-user-steps-today').text(totalSteps);
+  },
+
+// STAIRS METHODS
   displayAverageFlightsThisWeek(averageFlights) {
     $('#stairs-calendar-flights-average-weekly').text(averageFlights)
   },
@@ -100,30 +116,6 @@ let domUpdates = {
     $('#stairs-calendar-stairs-average-weekly').text(averageStairs);
   },
 
-  displayAllAverageOuncesToday(averageOunces) {
-    $('#hydration-friend-ounces-today').text(averageOunces);
-  },
-
-  displayAverageHourlySleepThisWeek(averageHourly) {
-    $('#sleep-calendar-hours-average-weekly').text(averageHourly);
-  },
-
-  displayAverageSleepQualityThisWeek(averageQuality) {
-    $('#sleep-calendar-quality-average-weekly').text(averageQuality);
-  },
-
-  displayMilesWalkedToday(milesWalked) {
-    $('#steps-info-miles-walked-today').text(milesWalked);
-  },
-
-  displayAverageMinutesActiveToday(averageMinutes) {
-    $('#steps-info-active-minutes-today').text(averageMinutes);
-  },
-
-  displayTotalStepsToday(totalSteps) {
-    $('#steps-user-steps-today').text(totalSteps);
-  },
-
   displayTotalFlightsToday(totalFlights) {
     $('#stairs-info-flights-today').text(totalFlights);
   },
@@ -132,8 +124,22 @@ let domUpdates = {
     $('#stairs-user-stairs-today').text(totalStairs);
   },
 
+// HYDRATION METHODS
+  displayAllAverageOuncesToday(averageOunces) {
+    $('#hydration-friend-ounces-today').text(averageOunces);
+  },
+
   displayTotalOuncesToday(totalOunces) {
     $('#hydration-user-ounces-today').text(totalOunces);
+  },
+
+// SLEEP METHODS
+  displayAverageHourlySleepThisWeek(averageHourly) {
+    $('#sleep-calendar-hours-average-weekly').text(averageHourly);
+  },
+
+  displayAverageSleepQualityThisWeek(averageQuality) {
+    $('#sleep-calendar-quality-average-weekly').text(averageQuality);
   },
 
   displaySleepQualityToday(qualityToday) {
@@ -143,54 +149,6 @@ let domUpdates = {
   displayHoursSleepToday(hoursSlept) {
     $('#sleep-user-hours-today').text(hoursSlept);
   },
-
-  // displayHydrationData(user, todayDate, userRepository, hydrationData) {
-  //   // this.sortedHydrationDataByDate(user)
-  //   this.displayDailyOzs(user);
-  // },
-
-
-  displayDailyOzs(user) {
-    // FUCK THIS METHOD
-    let weeklyOzs = user.ouncesRecord.slice(1, 7);
-    let weekData = [];
-    weeklyOzs.forEach(day => {
-      weekData.push(Object.values(day))
-    })
-    weekData.flat().map(data => {
-      dailyOzArray.forEach(element => {
-        element.innerText = data;
-      })
-    })
-  },
-
-  // sortedHydrationDataByDate(user) {
-  //   console.log('ouncesRecord', user.ouncesRecord.slice(1, 7));
-  // },
-  // displayDailyOzs(user) {
-  //   console.log('oz', $('.daily-oz'))
-  //   let weeklyOzs = user.ouncesRecord.slice(1, 7)
-  //   let weekData = [];
-  //   let week = weeklyOzs.forEach(day => {
-  //     weekData.push(Object.values(day))
-  //   })
-  //   let blah = dailyOzArray.map(element => {
-  //     weekData.forEach(data => {
-  //       element.innerText = data;
-  //     })
-  //   })
-  //   return blah;
-  //   // weekData.flat().forEach(value => {
-  //   // $('.daily-oz').html(`<h4 class='hydration-weekly-amount'><span class='daily-oz' id='hydration-calendar-ounces-1day'></span>${value}</h4>`)
-  //
-  // // let maybe = weekData.flat().reduce((acc, value) => {
-  // //   // console.log(weekData[value]);
-  // //   acc += `<h4 class='hydration-weekly-amount'><span class='daily-oz' id='hydration-calendar-ounces-1day'></span>${value}</h4>`
-  // //   console.log(acc);
-  // //   return acc
-  // // }, [])
-  // },
-
 }
 
 export default domUpdates;
