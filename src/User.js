@@ -41,6 +41,7 @@ import domUpdates from './DomUpdates'
     this.calculateAverageMinutesActiveThisWeek(todayDate);
     this.calculateAverageStepsThisWeek(todayDate);
     this.calculateAverageFlightsThisWeek(todayDate);
+    this.calculateAverageStairsThisWeek(todayDate);
     this.calculateMilesWalkedToday(user, todayDate, userRepository);
     this.calculateAverageMinutesActiveToday(user, todayDate, activityData);
     this.calculateAverageStepsToday(user, todayDate, activityData);
@@ -101,6 +102,7 @@ import domUpdates from './DomUpdates'
       return sum;
     }, 0) / 7).toFixed(1);
     domUpdates.displayAverageHourlySleepThisWeek(averageHours);
+    return averageHours;
   }
   //Check
   calculateMilesWalkedToday(user, todayDate, userRepository) {
@@ -108,6 +110,7 @@ import domUpdates from './DomUpdates'
       return (activity.date === todayDate && activity.userId === user.id)
     }).calculateMiles(userRepository);
     domUpdates.displayMilesWalkedToday(milesWalked);
+    return milesWalked;
   }
   //Check
   calculateAverageMinutesActiveToday(user, todayDate, activityData) {
@@ -115,6 +118,7 @@ import domUpdates from './DomUpdates'
       return activity.userID === user.id && activity.date === todayDate
     }).minutesActive
     domUpdates.displayAverageMinutesActiveToday(minutesActiveToday);
+    return minutesActiveToday;
   }
   //Check
   calculateAverageStepsToday(user, todayDate, activityData) {
@@ -122,6 +126,7 @@ import domUpdates from './DomUpdates'
       return activity.userID === user.id && activity.date === todayDate
     }).numSteps
     domUpdates.displayTotalStepsToday(averageStepsToday);
+    return averageStepsToday;
   }
   //Check
   calculateAverageFlightsToday(user, todayDate, activityData) {
@@ -129,6 +134,7 @@ import domUpdates from './DomUpdates'
       return activity.userID === user.id && activity.date === todayDate
     }).flightsOfStairs
     domUpdates.displayTotalFlightsToday(averageFlightsToday);
+    return averageFlightsToday;
   }
   //Check
   calculateAverageStairsToday(user, todayDate, activityData) {
@@ -136,6 +142,7 @@ import domUpdates from './DomUpdates'
       return activity.userID === user.id && activity.date === todayDate
     }).flightsOfStairs * 12;
     domUpdates.displayTotalStairsToday(averageStairsToday);
+    return averageStairsToday;
   }
   //Check
   calculateTotalOuncesToday(user, todayDate, hydrationData) {
@@ -143,6 +150,7 @@ import domUpdates from './DomUpdates'
       return hydration.userID === user.id && hydration.date === todayDate
     }).numOunces;
     domUpdates.displayTotalOuncesToday(averageOuncesToday);
+    return averageOuncesToday;
   }
   //Check
   calculateAverageQualityToday(user, todayDate, sleepData) {
@@ -150,6 +158,7 @@ import domUpdates from './DomUpdates'
       return sleep.userID === user.id && sleep.date === todayDate
     }).sleepQuality;
     domUpdates.displaySleepQualityToday(averageQualityToday);
+    return averageQualityToday;
   }
   //Check
   calculateAverageHoursSleptToday(user, todayDate, sleepData) {
@@ -157,6 +166,7 @@ import domUpdates from './DomUpdates'
       return sleep.userID === user.id && sleep.date === todayDate
     }).hoursSlept;
     domUpdates.displayHoursSleepToday(hoursSlept);
+    return hoursSlept;
   }
   //Check
   calculateAverageQualityThisWeek(todayDate) {
@@ -168,6 +178,7 @@ import domUpdates from './DomUpdates'
       return sum;
     }, 0) / 7).toFixed(1);
     domUpdates.displayAverageSleepQualityThisWeek(averageQuality);
+    return averageQuality;
   }
 
   updateActivities(activity) {
@@ -177,21 +188,6 @@ import domUpdates from './DomUpdates'
     }
   }
 
-  findClimbingRecord() {
-    return this.activityRecord.sort((a, b) => {
-      return b.flightsOfStairs - a.flightsOfStairs;
-    })[0].flightsOfStairs;
-  }
-
-  calculateDailyCalories(date) {
-    let totalMinutes = this.activityRecord.filter(activity => {
-      return activity.date === date
-    }).reduce((sumMinutes, activity) => {
-      return sumMinutes += activity.minutesActive
-    }, 0);
-    return Math.round(totalMinutes * 7.6);
-  }
-  //Check
   calculateAverageMinutesActiveThisWeek(todayDate) {
     let minutesActive = (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
@@ -200,10 +196,10 @@ import domUpdates from './DomUpdates'
       }
       return sum;
     }, 0) / 7).toFixed(0);
-    console.log('hi', minutesActive)
     domUpdates.displayAverageMinutesActiveThisWeek(minutesActive);
+    return minutesActive
   }
-  //Check
+  // check
   calculateAverageStepsThisWeek(todayDate) {
     let averageSteps = (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
@@ -213,6 +209,7 @@ import domUpdates from './DomUpdates'
       return sum;
     }, 0) / 7).toFixed(0);
     domUpdates.displayTotalStepsThisWeek(averageSteps);
+    return averageSteps
   }
   //Check
   calculateAverageFlightsThisWeek(todayDate) {
@@ -224,7 +221,19 @@ import domUpdates from './DomUpdates'
       return sum;
     }, 0) / 7).toFixed(1);
     domUpdates.displayAverageFlightsThisWeek(averageFlightsThisWeek);
-    domUpdates.displayAverageStairsThisWeek((averageFlightsThisWeek * 12).toFixed(0));
+    return averageFlightsThisWeek
+  }
+
+  calculateAverageStairsThisWeek(todayDate) {
+    let averageStairsThisWeek = (this.activityRecord.reduce((sum, activity) => {
+      let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
+      if (index <= this.activityRecord.indexOf(activity) && this.activityRecord.indexOf(activity) <= (index + 6)) {
+        sum += activity.flightsOfStairs;
+      }
+      return sum;
+    }, 0) / 7).toFixed(1);
+    domUpdates.displayAverageStairsThisWeek((averageStairsThisWeek * 12).toFixed(0));
+    return (averageStairsThisWeek * 12).toFixed(0)
   }
 
   findTrendingStepDays() {
@@ -285,13 +294,15 @@ import domUpdates from './DomUpdates'
       'totalWeeklySteps': this.totalStepsThisWeek
     });
     this.friendsActivityRecords = this.friendsActivityRecords.sort((a, b) => b.totalWeeklySteps - a.totalWeeklySteps);
-  }
-
-  sortedHydrationDataByDate(date) {
-    console.log(this.ouncesRecord)
-
-    }
   };
+
+};
+
+  // sortedHydrationDataByDate(date) {
+  //   console.log(this.ouncesRecord)
+
+  //   }
+  // };
 
 
 export default User;

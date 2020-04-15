@@ -4,9 +4,9 @@ import User from '../src/User';
 import Sleep from '../src/Sleep';
 import Activity from '../src/Activity';
 import Hydration from '../src/Hydration';
-let dailyOz = document.querySelectorAll('.daily-oz');
-let dailyOzArray = Array.from(dailyOz);
-export const domUpdates = {
+// let dailyOz = document.querySelectorAll('.daily-oz');
+// let dailyOzArray = Array.from(dailyOz);
+let domUpdates = {
 
   displayInitialDomData(user, todayDate, userRepository) {
     this.updateTrendingStairsDays(user);
@@ -92,12 +92,12 @@ export const domUpdates = {
     $('#stairs-calendar-flights-average-weekly').text(averageFlights)
   },
 
-  displayAverageStairsThisWeek(averageStairs) {
-    $('#stairs-calendar-stairs-average-weekly').text(averageStairs)
-  },
-
   displayAllAverageFlightsToday(averageFlights) {
     $('#stairs-friend-flights-average-today').text(averageFlights);
+  },
+
+  displayAverageStairsThisWeek(averageStairs){
+    $('#stairs-calendar-stairs-average-weekly').text(averageStairs);
   },
 
   displayAllAverageOuncesToday(averageOunces) {

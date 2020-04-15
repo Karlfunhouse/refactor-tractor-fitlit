@@ -286,9 +286,9 @@ function sleepButtonHandler() {
       // [X] DOM element for user input
           // [X] One main input with dropdown menu for different activites
       // [ ] How to populate newly posted data
-  // [ ] Refactor / consider each method in every class:
-      // [ ] Employ arguemnts and parameters for changing behaviors
-      // [ ] Make sure they are in places we want them to live
+  // [X] Refactor / consider each method in every class:
+      // [X] Employ arguemnts and parameters for changing behaviors
+      // [X] Make sure they are in places we want them to live
   // [X] Break up two main giant handlers:
       // [X] showInfo() --> maybe rename buttonHandler() and break up into:
           // [X] stepButtonHandler()
@@ -307,10 +307,10 @@ function sleepButtonHandler() {
   // [ ] Testing with SPIES
       // [X] Lesson on SPIES
       // [X] Get initial tests passing
-      // [ ] Refactor DOM manipulation into methods on an object
-      // [ ] Spy on all DOM manipulation methods to verify that they
-      // [ ] occurred and were called with the correct arguments
-      // [ ] Use an afterEach hook to clean up spies in between tests
+      // [X] Refactor DOM manipulation into methods on an object
+      // [X] Spy on all DOM manipulation methods to verify that they
+      // [X] occurred and were called with the correct arguments
+      // [X   ] Use an afterEach hook to clean up spies in between tests
   // [ ] Testing Firefox and Safari
   // [X] Mobile design: should work for all different screen sizes
       // [X] Mobile
