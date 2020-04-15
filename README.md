@@ -7,7 +7,7 @@
 ![Ipad Demo](Ipaddemo.gif)
 
 ## Website
-1. ![click here for link to our page] (https://karlfunhouse.github.io/refactor-tractor-fitlit/ )
+1. [click here for link to our github page](https://karlfunhouse.github.io/refactor-tractor-fitlit/ )
 
 
 
@@ -26,6 +26,6 @@
 
 ## Contributors:
 
-[Collin Kallery](https://github.com/collinkallery)
-[Karl Nielsen](https://github.com/karlfunhouse)
-[Melissa VanKempen](https://github.com/Melizzo)
+* **[Collin Kallery](https://github.com/collinkallery)**
+* **[Karl Nielsen](https://github.com/karlfunhouse)**
+* **[Melissa VanKempen](https://github.com/Melizzo)**
