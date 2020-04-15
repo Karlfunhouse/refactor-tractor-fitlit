@@ -7,7 +7,7 @@
 ![Ipad Demo](Ipaddemo.gif)
 
 ## Website
-1. [click here for link to our github page](https://karlfunhouse.github.io/refactor-tractor-fitlit/ )
+1. [click here for link to our github page](https://karlfunhouse.github.io/refactor-tractor-fitlit/)
 
 
 
