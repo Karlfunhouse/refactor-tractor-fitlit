@@ -15,7 +15,6 @@ let userData;
 let sleepData;
 let activityData;
 let hydrationData;
-let dailyOz = $('.daily-oz');
 
 // FETCHING
 userData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
@@ -56,7 +55,6 @@ Promise.all([userData, sleepData, activityData, hydrationData])
   .then(() => {
     let user = userRepository.users[Math.floor(Math.random() * userRepository.users.length)]
     let todayDate = "2020/01/22";
-    console.log(user);
     user.findFriendsNames(userRepository.users);
     domUpdates.displayInitialDomData(user, todayDate, userRepository);
     startApplication(user, userRepository, todayDate, activityData, hydrationData, sleepData);
@@ -246,97 +244,3 @@ function sleepButtonHandler() {
     domUpdates.flipCard(event.target.parentNode, $('#sleep-main-card'));
   }
 };
-
-  // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
-  //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
-  //     return -1;
-  //   }
-  //   if (Object.keys(a)[0] < Object.keys(b)[0]) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // });
-  //
-  // let weeklyHydrationDataArray = sortedHydrationDataByDate.splice(0, 7);
-  // console.log('weekly', weeklyHydrationDataArray);
-  // console.log('sorted', sortedHydrationDataByDate.splice(0, 7));
-  // //Refactor this into a forEach
-  // for (var i = 0; i < $('.daily-oz').length; i++) {
-  //   $('.daily-oz')[i].text(user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0]))
-  // };
-  //splice sortedHydrationDataByDate to get most recent 7 entires
-  //loop through the first 7 entries and populate the oz per day
-// }
-//
-// const displayDailyOzs = () => {
-//   dailyOz.forEach(day, i) => {
-//     day.innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
-//   }
-// }
-
-
-
-
-// 1 WEEK LEFT CHECKLIST:
-  // [X] Date data (find out wtf is going on here)
-      // [X] Down the road: working with data up to 1/22
-      // or working with more recent data?
-  // [X] POSTing:
-      // [X] Already written out by Karl - flesh it out
-      // [X] DOM element for user input
-          // [X] One main input with dropdown menu for different activites
-      // [ ] How to populate newly posted data
-  // [X] Refactor / consider each method in every class:
-      // [X] Employ arguemnts and parameters for changing behaviors
-      // [X] Make sure they are in places we want them to live
-  // [X] Break up two main giant handlers:
-      // [X] showInfo() --> maybe rename buttonHandler() and break up into:
-          // [X] stepButtonHandler()
-          // [X] stairButtonHandler()
-          // [X] sleepButtonHandler()
-          // [X] hydrationButtonHandler()
-      // [X] displayUserInfo():
-          // [X] displayGeneralUserInfo()
-          // [X] displayStairData()
-          // [X] displayStepData()
-          // [X] displayHydrationData()
-          // [X] displaySleepData()
-  // [X] SCSS
-      // [X] base.scss (holds all imports & variables)
-      // [X] styles.scss (holds all styling using variables)
-  // [ ] Testing with SPIES
-      // [X] Lesson on SPIES
-      // [X] Get initial tests passing
-      // [X] Refactor DOM manipulation into methods on an object
-      // [X] Spy on all DOM manipulation methods to verify that they
-      // [X] occurred and were called with the correct arguments
-      // [X   ] Use an afterEach hook to clean up spies in between tests
-  // [ ] Testing Firefox and Safari
-  // [X] Mobile design: should work for all different screen sizes
-      // [X] Mobile
-      // [X] Tablets
-      // [X] Desk monitors
-      // [X] Remove common properties from rules at each breakpoint
-  // [X] Accessibility
-      // [X] Tab through app and use it with a mouse
-      // [X] Must be viewable through color-blind extension
-      // [X] Use Accessibility Audit to get close to a score of 100%
-
-// THINGS TO ADDRESS
-
-// let dailyOz = document.querySelectorAll('.daily-oz');
-// let dailyOz = $('.daily-oz');
-
-// let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-//
-// friendsStepsParagraphs.forEach(paragraph => {
-//   if (friendsStepsParagraphs[0] === paragraph) {
-//     paragraph.classList.add('green-text');
-//   }
-//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-//     paragraph.classList.add('red-text');
-//   }
-//   if (paragraph.innerText.includes('YOU')) {
-//     paragraph.classList.add('yellow-text');
-//   }
-// });

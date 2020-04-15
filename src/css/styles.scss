@@ -13,7 +13,6 @@ body {
   background-color: $primary-background;
 }
 
-/* HEADER */
 header {
   text-align: center;
   height: 9vw;
@@ -166,6 +165,7 @@ h4 {
   margin-bottom: 0.2vw;
 }
 
+// BACKGROUND-IMAGES 
 .steps-go-back-button {
   background-image: url("../images/steps-goback.png");
 }
@@ -237,7 +237,6 @@ h4 {
 .stairs-trending-button {
   background-image: url("../images/stairs-trending.png");
 }
-// CHANGING CLASSES
 
 .green-text {
   color: $green-text;
