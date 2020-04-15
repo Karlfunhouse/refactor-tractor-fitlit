@@ -26,6 +26,6 @@
 
 ## Contributors:
 
-[Collin Kallery](https://github.com/collinkallery)
-[Karl Nielsen](https://github.com/karlfunhouse)
-[Melissa VanKempen](https://github.com/Melizzo)
+* **[Collin Kallery](https://github.com/collinkallery)**
+* **[Karl Nielsen](https://github.com/karlfunhouse)**
+* **[Melissa VanKempen](https://github.com/Melizzo)**
