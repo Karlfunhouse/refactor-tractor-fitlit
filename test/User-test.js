@@ -1,11 +1,30 @@
-import { expect } from 'chai';
+import $ from 'jquery';
+const chai = require('chai');
+const expect = chai.expect;
+const spies = require("chai-spies");
+chai.use(spies);
 
 import User from '../src/User';
-
+import domUpdates from '../src/DomUpdates'
+import UserRepository from '../src/UserRepository';
+import Sleep from '../src/Sleep';
+import Hydration from '../src/Hydration';
 
 describe('User', function() {
   let user;
+
+  afterEach(() => {
+    chai.spy.restore(domUpdates);
+  });
+
   beforeEach(() => {
+    chai.spy.on(domUpdates, "displayAverageHourlySleepThisWeek", () => {});
+    chai.spy.on(domUpdates, "displayAverageSleepQualityThisWeek", () => {});
+    chai.spy.on(domUpdates, "displayAverageMinutesActiveThisWeek", () => {});
+    chai.spy.on(domUpdates, "displayTotalStepsThisWeek", () => {});
+    chai.spy.on(domUpdates, "displayAverageFlightsThisWeek", () => {});
+    chai.spy.on(domUpdates, "", () => {});
+  
     user = new User({
       'id': 1,
       'name': 'Luisa Hane',
@@ -107,30 +126,40 @@ describe('User', function() {
   it('calculateAverageHoursThisWeek should calculate average sleep hours for week before given date', function() {
     user.sleepHoursRecord = [{date: "2019/09/22", hours: 9.6}, {date: "2019/09/21", hours: 8.2}, {date: "2019/09/20", hours: 9.9}, {date: "2019/09/19", hours: 4.2}, {date: "2019/09/18", hours: 9.5}, {date: "2019/09/17", hours: 7.8}, {date: "2019/09/16", hours: 10.2}, {date: "2019/09/15", hours: 5.7}, {date: "2019/09/14", hours: 8.8}, {date: "2019/09/13", hours: 4.6}, {date: "2019/09/12", hours: 5.3}];
     expect(user.calculateAverageHoursThisWeek('2019/09/21')).to.equal('7.9');
+    expect(domUpdates.displayAverageHourlySleepThisWeek).to.have.been.called(1);
+    expect(domUpdates.displayAverageHourlySleepThisWeek).to.have.been.called.with('7.9');
   });
   it('calculateAverageQualityThisWeek should calculate average quality of sleep for week before a given date', function() {
     user.sleepQualityRecord = [{date: "2019/09/22", quality: 9.6}, {date: "2019/09/21", quality: 8.2}, {date: "2019/09/20", quality: 9.9}, {date: "2019/09/19", quality: 4.2}, {date: "2019/09/18", quality: 9.5}, {date: "2019/09/17", quality: 7.8}, {date: "2019/09/16", quality: 10.2}, {date: "2019/09/15", quality: 5.7}, {date: "2019/09/14", quality: 8.8}, {date: "2019/09/13", quality: 4.6}, {date: "2019/09/12", quality: 5.3}];
     expect(user.calculateAverageQualityThisWeek('2019/09/22')).to.equal('8.5')
+    expect(domUpdates.displayAverageSleepQualityThisWeek).to.have.been.called(1);
+    expect(domUpdates.displayAverageSleepQualityThisWeek).to.have.been.called.with('8.5');
   });
-  it('should have a method that return the highest climbing record', function() {
-    user.activityRecord = [{flightsOfStairs: 10}, {flightsOfStairs: 15}, {flightsOfStairs: 17}]
-    expect(user.findClimbingRecord()).to.equal(17)
-  });
-  it('should have a method that calculates daily calories burned', function() {
-    user.activityRecord = [{date: "2019/09/16", activityRecord: 78}, {date: "2019/09/17", minutesActive: 100}, {date: "2019/09/17", minutesActive: 20}];
-    expect(user.calculateDailyCalories("2019/09/17")).to.equal(912)
-  });
+  // it('should have a method that return the highest climbing record', function() {
+  //   user.activityRecord = [{flightsOfStairs: 10}, {flightsOfStairs: 15}, {flightsOfStairs: 17}]
+  //   expect(user.findClimbingRecord()).to.equal(17)
+  // });
+  // it('should have a method that calculates daily calories burned', function() {
+  //   user.activityRecord = [{date: "2019/09/16", activityRecord: 78}, {date: "2019/09/17", minutesActive: 100}, {date: "2019/09/17", minutesActive: 20}];
+  //   expect(user.calculateDailyCalories("2019/09/17")).to.equal(912)
+  // });
   it('calculateAverageMinutesActiveThisWeek should calculate the average minutes active', function() {
     user.activityRecord = [{date: "2019/09/18", minutesActive: 78}, {date: "2019/09/17", minutesActive: 100}, {date: "2019/09/16", minutesActive: 20}, {date: "2019/09/15", minutesActive: 21}, {date: "2019/09/14", minutesActive: 35}, {date: "2019/09/13", minutesActive: 37}, {date: "2019/06/12", minutesActive: 42}, {date: "2019/09/11", minutesActive: 18}, {date: "2019/09/10", minutesActive: 16}, {date: "2019/09/09", minutesActive: 81}];
     expect(user.calculateAverageMinutesActiveThisWeek("2019/09/17")).to.equal('39')
+    expect(domUpdates.displayAverageMinutesActiveThisWeek).to.have.been.called(1);
+    expect(domUpdates.displayAverageMinutesActiveThisWeek).to.have.been.called.with('39');
   });
   it('calculateAverageStepsThisWeek should calculate the average steps taken in a given week', function() {
     user.activityRecord = [{date: "2019/09/18", steps: 1178}, {date: "2019/09/17", steps: 1080}, {date: "2019/09/16", steps: 120}, {date: "2019/09/15", steps: 891}, {date: "2019/09/14", steps: 380}, {date: "2019/09/13", steps: 3234}, {date: "2019/06/12", steps: 1111}, {date: "2019/09/11", steps: 18}, {date: "2019/09/10", steps: 345}, {date: "2019/09/09", steps: 81}];
     expect(user.calculateAverageStepsThisWeek("2019/09/17")).to.equal('976')
+    expect(domUpdates.displayTotalStepsThisWeek).to.have.been.called(1);
+    expect(domUpdates.displayTotalStepsThisWeek).to.have.been.called.with('976');
   });
-  it('calculateAverageFlightsThisWeek should calculate the average flights of stairs taken in a given week', function() {
+  it.only('calculateAverageFlightsThisWeek should calculate the average flights of stairs taken in a given week', function() {
     user.activityRecord = [{date: "2019/09/18", flightsOfStairs: 4}, {date: "2019/09/17", flightsOfStairs: 6}, {date: "2019/09/16", flightsOfStairs: 1}, {date: "2019/09/15", flightsOfStairs: 2}, {date: "2019/09/14", flightsOfStairs: 12}, {date: "2019/09/13", flightsOfStairs: 21}, {date: "2019/06/12", flightsOfStairs: 3}, {date: "2019/09/11", flightsOfStairs: 14}, {date: "2019/09/10", flightsOfStairs: 2}, {date: "2019/09/09", flightsOfStairs: 8}];
     expect(user.calculateAverageFlightsThisWeek("2019/09/17")).to.equal('8.4')
+    expect(domUpdates.displayAverageFlightsThisWeek).to.have.been.called(1);
+    expect(domUpdates.displayAverageFlightsThisWeek).to.have.been.called.with('8.4');
   });
 
   it('updateAccomplishedDays should create an array of good days', function() {

@@ -96,6 +96,10 @@ let domUpdates = {
     $('#stairs-friend-flights-average-today').text(averageFlights);
   },
 
+  displayAverageStairsThisWeek(averageStairs){
+    $('#stairs-calendar-stairs-average-weekly').text(averageStairs);
+  },
+
   displayAllAverageOuncesToday(averageOunces) {
     $('#hydration-friend-ounces-today').text(averageOunces);
   },
